@@ -13,12 +13,6 @@ var NUM='258844266127';
 
 [].forEach.call(document.querySelectorAll('.wm img'),function(im){im.addEventListener('error',function(){im.style.display='none'});if(im.complete&&im.naturalWidth===0)im.style.display='none'});
 
-/* ---- ticker ---- */
-var P=['Mobiliário','Eletrodomésticos','Equipamento de TI','Peças auto','Peças industriais','Acessórios de tecnologia','Material de escritório','Equipamento de hotelaria'];
-var Q=['Fábrica','Inspeção','Embarque','Alfândega','Entrega','China','Moçambique'];
-function fillT(el,a){if(!el)return;var h='',k,j;for(k=0;k<2;k++)for(j=0;j<a.length;j++)h+='<span>'+a[j]+'</span><i>&bull;</i>';el.innerHTML=h}
-fillT($('t1'),P);fillT($('t2'),Q);
-
 /* ---- cartão de seguimento (assinatura do herói) ---- */
 var tr=$('track');
 if(tr){

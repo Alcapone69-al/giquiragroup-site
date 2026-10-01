@@ -186,11 +186,6 @@ home = f'''<section class="hero"><div class="w hgrid">
   </figure>
 </div></section>
 
-<section class="tick" aria-label="Exemplos do que compramos">
-  <div class="tk" id="t1" aria-hidden="true"></div><div class="tk" id="t2" aria-hidden="true"></div>
-  <div class="w"><p class="tick-note">Se é fabricado, encontramos quem o faça bem. Não encontra a sua categoria? Envie a especificação — procuramos por si.</p></div>
-</section>
-
 <section class="sec" id="como"><div class="w g2">
   <div class="sticky"><p class="eyebrow rv">Como funciona</p><h2 class="ttl">Do pedido à sua porta</h2><p class="lead rv" style="--i:1">Seis passos e um só responsável. A logística existe para fechar o ciclo: garantir que o que compramos chega — inteiro, documentado e no prazo.</p><a class="btn o rv" style="--i:2" href="procurement.html">O serviço em detalhe</a></div>
   {steps_html()}
