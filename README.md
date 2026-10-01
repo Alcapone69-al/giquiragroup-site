@@ -24,15 +24,18 @@ No topo desse ficheiro está a **CONFIGURAÇÃO**: domínio, logótipo, parceiro
    - `www` → CNAME → `alcapone69-al.github.io`
    - domínio raiz → registos A → 185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153
 
-## Logótipo oficial (pendente)
+## Logótipo oficial
 
-Copiar para `media/brand/` (de preferência SVG; versão para fundo claro e versão branca para fundo escuro) e preencher
-`BRAND["logo"]` e `BRAND["logo_light"]`. Aparece automaticamente no cabeçalho, no rodapé e na transição entre páginas.
-Trocar também `favicon.png` e criar `media/og-giquira.jpg` (1200×630) para a pré-visualização nas redes sociais.
+Ficheiros em `media/brand/` (gerados a partir do logótipo oficial):
+- `giquira-logo-horizontal.webp/.png` — símbolo + nome, para fundo claro (cabeçalho)
+- `giquira-logo-horizontal-branco.webp/.png` — para fundo escuro (rodapé e transição entre páginas)
+- `giquira-simbolo.webp/.png` — só o símbolo · `giquira-nome-escuro.png` / `giquira-nome-branco.png` — só o nome
+- `favicon.png`, `apple-touch-icon.png`, `media/brand/icon-192.png` — ícones · `media/og-giquira.jpg` — pré-visualização nas redes
+Configuração em `BRAND` (tools/build_site.py). Se chegar uma versão vetorial (SVG), basta substituir os caminhos.
 
-## Parceiros (logótipos pendentes)
+## Parceiros
 
-Colocar em `media/logos/` e preencher `"logo"` em `PARTNERS`.
+Logótipos em `media/logos/`, configurados em `PARTNERS`.
 
 ## Galeria de produtos (preparada, vazia)
 

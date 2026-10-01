@@ -56,6 +56,8 @@ header.scrolled{border-bottom-color:var(--line)}
 /* marca: texto por omissão; o logótipo oficial entra pela configuração BRAND em tools/build_site.py */
 .brand{display:inline-flex;align-items:center;gap:12px;text-decoration:none;color:inherit;flex:none}
 .brand img{height:40px;width:auto}
+footer .brand img{height:44px}
+@media(max-width:560px){.brand img{height:34px}}
 .brand .bn{display:block;font:600 20px/1 var(--h);letter-spacing:-.02em;white-space:nowrap}
 .brand .bn span{font-weight:500;color:var(--mut)}
 .brand .bt{display:block;font:500 11.5px/1 var(--b);color:var(--mut);margin-top:5px;letter-spacing:.01em}
@@ -376,7 +378,7 @@ html.js .mosaic [data-img].in:hover img,html.js .card:hover [data-img].in img{tr
 .wipe::before{background:var(--leaf)}
 .wipe::after{background:#24561A}
 .wipe .wc{position:relative;z-index:1;display:grid;justify-items:center;gap:14px;text-align:center;padding:24px}
-.wipe .wl{height:clamp(56px,9vw,88px);width:auto;opacity:0;transform:translateY(14px) scale(.96)}
+.wipe .wl{height:clamp(44px,6.5vw,72px);width:auto;max-width:86vw;opacity:0;transform:translateY(14px) scale(.96)}
 .wipe .wn{font:600 clamp(30px,5vw,56px)/1.05 var(--h);letter-spacing:-.04em;overflow:hidden;padding-bottom:.1em}
 .wipe .wn span{display:inline-block;transform:translateY(110%)}
 .wipe .wn em{font-style:normal;font-weight:500;opacity:.7}

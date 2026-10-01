@@ -28,7 +28,9 @@ BRAND = {
     "name": "Giquira", "name_2": "Group",
     "tagline": "Procurement · China → Moçambique",
     "slogan": "Committed to quality. Committed to you.",
-    "logo": None, "logo_light": None,
+    "logo": "media/brand/giquira-logo-horizontal.webp",          # cabeçalho (fundo claro)
+    "logo_light": "media/brand/giquira-logo-horizontal-branco.webp",  # rodapé e transição (fundo escuro)
+    "mark": "media/brand/giquira-simbolo.webp",                   # símbolo sozinho
 }
 
 CONTACT = {
@@ -75,7 +77,7 @@ def img(name, alt, sizes="(max-width:760px) 100vw, 50vw", eager=False):
 def brand(dark=False):
     logo = BRAND["logo_light"] if dark and BRAND["logo_light"] else BRAND["logo"]
     if logo:
-        return (f'<a class="brand has-logo" href="index.html"><img src="{logo}" alt="" height="40">'
+        return (f'<a class="brand has-logo" href="index.html" aria-label="{BRAND["name"]} {BRAND["name_2"]}, página inicial"><img src="{logo}" alt="" width="195" height="40">'
                 f'<span class="bx"><span class="bn">{BRAND["name"]} {BRAND["name_2"]}</span></span></a>')
     return (f'<a class="brand" href="index.html" aria-label="{BRAND["name"]} {BRAND["name_2"]}, página inicial"><span class="bx">'
             f'<span class="bn">{BRAND["name"]} <span>{BRAND["name_2"]}</span></span>'
@@ -106,7 +108,8 @@ def page(fname, title, desc, body, schema=False):
         if SITE_URL and BRAND["logo"]: org["logo"] = url(BRAND["logo"])
         ld = f'<script type="application/ld+json">{json.dumps(org, ensure_ascii=False)}</script>\n'
     labels = json.dumps({h: t for h, t in NAV}, ensure_ascii=False)
-    wl = f'<img class="wl" src="{BRAND["logo_light"] or BRAND["logo"]}" alt="">' if (BRAND["logo_light"] or BRAND["logo"]) else ""
+    wl = f'<img class="wl" src="{BRAND["logo_light"] or BRAND["logo"]}" alt="" width="973" height="200">' if (BRAND["logo_light"] or BRAND["logo"]) else ""
+    wn = "" if wl else f'<div class="wn"><span>{BRAND["name"]} <em>{BRAND["name_2"]}</em></span></div>'
     html = f'''<!doctype html>
 <html lang="pt-MZ">
 <head>
@@ -123,6 +126,7 @@ def page(fname, title, desc, body, schema=False):
 <meta property="og:description" content="{desc}">
 {og_img}<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preload" href="assets/fonts/schibsted-grotesk-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/instrument-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/site.css">
@@ -130,7 +134,7 @@ def page(fname, title, desc, body, schema=False):
 {ld}</head>
 <body data-wa="{CONTACT["wa_main"]}">
 <div class="bar" id="bar" aria-hidden="true"></div>
-<div class="wipe" id="wipe" aria-hidden="true" data-labels='{labels}'><div class="wc">{wl}<div class="wn"><span>{BRAND["name"]} <em>{BRAND["name_2"]}</em></span></div><div class="wd" id="wd"></div></div></div>
+<div class="wipe" id="wipe" aria-hidden="true" data-labels='{labels}'><div class="wc">{wl}{wn}<div class="wd" id="wd"></div></div></div>
 <a class="skip" href="#conteudo">Saltar para o conteúdo</a>
 
 <header>
