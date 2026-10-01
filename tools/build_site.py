@@ -40,11 +40,11 @@ CONTACT = {
 
 # Parceiros: quando os logótipos chegarem, colocar em media/logos/ e preencher "logo".
 PARTNERS = [
-    {"name": "Mozambique Terramar Trading", "kind": "Lda", "logo": None},
-    {"name": "Transcargo Haulage Contractors", "kind": "Lda", "logo": None},
-    {"name": "Micaia", "kind": "Fundação", "logo": None},
-    {"name": "MozFert", "kind": "Lda", "logo": None},
-    {"name": "EDM", "kind": "Empresa pública", "logo": None},
+    {"name": "Mozambique Terramar Trading", "kind": "Lda", "logo": "media/logos/terramar.webp"},
+    {"name": "Transcargo Haulage Contractors", "kind": "Lda", "logo": "media/logos/transcargo.webp"},
+    {"name": "Micaia", "kind": "Fundação", "logo": "media/logos/micaia.webp"},
+    {"name": "MozFert", "kind": "Lda", "logo": "media/logos/mozfert.webp"},
+    {"name": "EDM", "kind": "Empresa pública", "logo": "media/logos/edm.webp"},
 ]
 
 # Galeria de produtos — preparada, ainda vazia (não inventar produtos).
