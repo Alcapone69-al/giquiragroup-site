@@ -1,17 +1,40 @@
 # Giquira Group — site
 
-Site estático (HTML, CSS e JS), alojado no GitHub Pages. Mesmo método do site DA-KA.
+Site estático (HTML, CSS e JavaScript sem dependências), alojado no GitHub Pages.
 
-- Páginas: `index.html`, `procurement.html`, `produtos.html`, `sobre.html`, `contactos.html`
-- Estilos e animações: `assets/site.css`, `assets/site.js`
-- Fotografias, logótipos e vídeos: pasta `media/` (ver lista abaixo)
-- As páginas são geradas por `tools/build_site.py` (texto, menu e rodapé num só lugar).
-  Depois de editar, correr `python3 tools/build_site.py`.
+- Páginas: `index.html`, `procurement.html`, `produtos.html`, `sobre.html`, `contactos.html`, `404.html`
+- Estilos e animações: `assets/site.css` · comportamento: `assets/site.js`
+- Tipos de letra (no próprio site): Schibsted Grotesk (títulos) e Instrument Sans (texto) — licença SIL OFL em `assets/fonts/`
+- Fotografias e vídeos: `media/`
 
-## Ficheiros que faltam em `media/`
+## Como editar
 
-giquira-logo.png · og-giquira.jpg (1200×630)
-ceo-factory-enhanced.jpg · ceo-factory.jpg · ceo-office.jpg · ceo-tea-meeting.jpg · ceo-dinner.jpg · ceo-container.jpg
-factory-visit-group.jpg · factory-visit-portrait.jpg · container-full.jpg · logistica-operacao.jpg · produtos-diversos.jpg
-factory-visit-video-1/2/3.mp4 e factory-visit-video-1/2/3-poster.jpg
-logos/terramar-logo.png · logos/transcargo-haulage-logo.png · logos/micaia-logo.png · logos/mozfert-logo.png · logos/edm-logo.png
+As páginas são geradas por `tools/build_site.py`. Editar o texto lá e correr:
+
+    python3 tools/build_site.py
+
+No topo desse ficheiro está a **CONFIGURAÇÃO**: domínio, logótipo, parceiros e produtos.
+
+## Ligar o domínio
+
+1. Em `tools/build_site.py`: `SITE_URL = "https://www.o-dominio"` e `BASE_PATH = "/"`.
+2. Correr `python3 tools/build_site.py` (cria `CNAME`, `sitemap.xml` e os links canónicos) e publicar.
+3. GitHub → Settings → Pages → Custom domain: o mesmo domínio; depois ativar **Enforce HTTPS**.
+4. No DNS do domínio (sem mexer nos registos MX/SPF/DKIM do email):
+   - `www` → CNAME → `alcapone69-al.github.io`
+   - domínio raiz → registos A → 185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153
+
+## Logótipo oficial (pendente)
+
+Copiar para `media/brand/` (de preferência SVG; versão para fundo claro e versão branca para fundo escuro) e preencher
+`BRAND["logo"]` e `BRAND["logo_light"]`. Aparece automaticamente no cabeçalho, no rodapé e na transição entre páginas.
+Trocar também `favicon.png` e criar `media/og-giquira.jpg` (1200×630) para a pré-visualização nas redes sociais.
+
+## Parceiros (logótipos pendentes)
+
+Colocar em `media/logos/` e preencher `"logo"` em `PARTNERS`.
+
+## Galeria de produtos (preparada, vazia)
+
+Acrescentar itens a `PRODUCTS` (nome, descrição, preço opcional, categoria opcional, fotografia). A secção só aparece
+quando houver produtos.
