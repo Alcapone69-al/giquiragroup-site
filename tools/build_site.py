@@ -26,12 +26,15 @@ BASE_PATH = "/giquiragroup-site/"
 #   "logo_light": "media/brand/giquira-logo-branco.svg",  (versão para fundo escuro: rodapé e transição)
 BRAND = {
     "name": "Giquira", "name_2": "Group",
-    "tagline": "Procurement · China → Moçambique",
+    "tagline": "Procurement · Logística · Produtos",
     "slogan": "Committed to quality. Committed to you.",
     "logo": "media/brand/giquira-logo-horizontal.webp",          # cabeçalho (fundo claro)
     "logo_light": "media/brand/giquira-logo-horizontal-branco.webp",  # rodapé e transição (fundo escuro)
     "mark": "media/brand/giquira-simbolo.webp",                   # símbolo sozinho
 }
+
+# Empresa do grupo que faz o procurement (carta de apresentação, nov. 2026)
+COMPAN = {"name": "Compan Services, Lda", "founded": "novembro de 2021", "team": 8}
 
 CONTACT = {
     "wa_main": "258844266127", "wa_main_label": "+258 84 426 6127",
@@ -46,7 +49,6 @@ PARTNERS = [
     {"name": "Transcargo Haulage Contractors", "kind": "Lda", "logo": "media/logos/transcargo.webp"},
     {"name": "Micaia", "kind": "Fundação", "logo": "media/logos/micaia.webp"},
     {"name": "MozFert", "kind": "Lda", "logo": "media/logos/mozfert.webp"},
-    {"name": "EDM", "kind": "Empresa pública", "logo": "media/logos/edm.webp"},
 ]
 
 # Galeria de produtos — preparada, ainda vazia (não inventar produtos).
@@ -98,8 +100,10 @@ def page(fname, title, desc, body, schema=False):
     ld = ""
     if schema:
         org = {"@context": "https://schema.org", "@type": "Organization", "name": "Giquira Group",
-               "slogan": BRAND["slogan"], "foundingDate": "2021", "email": CONTACT["email"],
-               "description": "Procurement internacional: compramos na China e entregamos em Moçambique, com logística incluída.",
+               "slogan": BRAND["slogan"], "email": CONTACT["email"],
+               "description": "Grupo familiar em Maputo: procurement internacional, logística e venda de produtos.",
+               "subOrganization": {"@type": "Organization", "name": COMPAN["name"], "foundingDate": "2021-11",
+                                   "description": "Empresa do Giquira Group dedicada ao procurement."},
                "telephone": ["+" + CONTACT["wa_main"], "+" + CONTACT["wa_alt"]],
                "address": {"@type": "PostalAddress", "streetAddress": CONTACT["address_1"], "addressLocality": "Maputo", "addressCountry": "MZ"},
                "areaServed": {"@type": "Country", "name": "Moçambique"},
@@ -163,7 +167,7 @@ def page(fname, title, desc, body, schema=False):
 <footer><div class="w fw">
   <div>
     {brand(dark=True)}
-    <p style="margin:20px 0 0;max-width:36ch">Procurement internacional para empresas, ONGs, instituições e particulares em Moçambique.</p>
+    <p style="margin:20px 0 0;max-width:36ch">Grupo familiar em Maputo: procurement, logística e venda de produtos.</p>
   </div>
   <div><h4>Páginas</h4><ul>{"".join(f'<li><a href="{h}">{t}</a></li>' for h, t in NAV)}</ul></div>
   <div><h4>Contacto</h4><ul>
@@ -226,15 +230,15 @@ def china_html(videos=True):
     S = "(max-width:760px) 50vw, 33vw"
     return f'''<section class="sec dark" id="china"><div class="w">
   <div class="head">
-    <div data-rv><p class="eyebrow">No terreno, na China</p><h2>Não compramos por catálogo. <em>Vamos à fábrica.</em></h2></div>
-    <p class="lead" data-rv style="--i:1">O nosso CEO, Danilo, acompanha pessoalmente fornecedores e fábricas na China: das reuniões de negociação à linha de produção e ao contentor pronto a partir. É assim que a qualidade prometida passa a ser a qualidade entregue.</p>
+    <div data-rv><p class="eyebrow">No terreno</p><h2>Não compramos por catálogo. <em>Vamos à fábrica.</em></h2></div>
+    <p class="lead" data-rv style="--i:1">A nossa equipa visita fornecedores e fábricas: das reuniões de negociação à linha de produção e ao contentor pronto a partir. É assim que a qualidade prometida passa a ser a qualidade entregue.</p>
   </div>
   <div class="mosaic">
-    <figure class="a" data-img>{img("fabrica-maquinaria", "Danilo com um parceiro numa fábrica de maquinaria pesada na China", "(max-width:760px) 100vw, 42vw")}<figcaption>Visita a fábrica de maquinaria pesada</figcaption></figure>
-    <figure class="b" data-img style="--i:1">{img("reuniao-cha", "Danilo em reunião com uma fornecedora na China", S)}<figcaption>Reunião com fornecedora</figcaption></figure>
-    <figure class="c" data-img style="--i:2">{img("reuniao-escritorio", "Danilo em reunião num escritório na China", S)}<figcaption>Negociação</figcaption></figure>
-    <figure class="d" data-img style="--i:1">{img("jantar-parceiros", "Danilo num jantar com parceiros comerciais na China", S)}<figcaption>Com parceiros</figcaption></figure>
-    <figure class="e" data-img style="--i:2">{img("contentor-danilo", "Danilo em frente a um contentor carregado de mobiliário", S)}<figcaption>Contentor pronto a partir</figcaption></figure>
+    <figure class="a" data-img>{img("fabrica-maquinaria", "Visita a uma fábrica de maquinaria pesada na China", "(max-width:760px) 100vw, 42vw")}<figcaption>Visita a fábrica de maquinaria pesada</figcaption></figure>
+    <figure class="b" data-img style="--i:1">{img("reuniao-cha", "Reunião com uma fornecedora na China", S)}<figcaption>Reunião com fornecedora</figcaption></figure>
+    <figure class="c" data-img style="--i:2">{img("reuniao-escritorio", "Reunião de negociação num escritório na China", S)}<figcaption>Negociação</figcaption></figure>
+    <figure class="d" data-img style="--i:1">{img("jantar-parceiros", "Jantar com parceiros comerciais na China", S)}<figcaption>Com parceiros</figcaption></figure>
+    <figure class="e" data-img style="--i:2">{img("contentor-danilo", "Contentor carregado de mobiliário, pronto a partir", S)}<figcaption>Contentor pronto a partir</figcaption></figure>
   </div>
   {vids}
 </div></section>'''
@@ -260,30 +264,63 @@ GO = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4"
 
 # ═════════════════════════ INÍCIO ═════════════════════════
 
-TRACK = ["Fábrica", "Negociação", "Produção", "Inspeção", "Embarque", "Entrega"]
 home = f'''<section class="hero"><div class="w hgrid">
   <div>
-    <p class="eyebrow fade" style="--d:0">Procurement internacional, desde 2021</p>
-    <h1>{lines("Compramos na <em>origem.</em>", "Entregamos em Moçambique.")}</h1>
-    <p class="lead fade" style="--d:.35">Encontramos o fornecedor certo na China, negociamos por si, acompanhamos a produção na fábrica e tratamos do transporte até à sua porta. Um só parceiro, do pedido à entrega.</p>
-    <div class="cta fade" style="--d:.5"><a class="btn" href="#pedido">Pedir cotação {ARROW}</a><a class="btn o" href="#como">Ver como funciona</a></div>
-    <ul class="facts fade" style="--d:.65"><li><b>4</b><span>Países</span></li><li><b>5</b><span>Parceiros</span></li><li><b>8</b><span>Colaboradores</span></li></ul>
+    <p class="eyebrow fade" style="--d:0">Empresa de família · Maputo</p>
+    <h1>{lines("Um grupo de família.", "Um só <em>parceiro.</em>")}</h1>
+    <p class="lead fade" style="--d:.35">O Giquira Group encontra o fornecedor certo, onde quer que ele esteja, trata do transporte até Moçambique e tem loja com stock para quem precisa já.</p>
+    <div class="cta fade" style="--d:.5"><a class="btn" href="#pedido">Pedir cotação {ARROW}</a><a class="btn o" href="#servicos">Ver os serviços</a></div>
+    <ul class="facts fade" style="--d:.65"><li><b>3</b><span>Áreas de negócio</span></li><li><b>4</b><span>Países</span></li><li><b>{COMPAN["team"]}</b><span>Colaboradores</span></li></ul>
   </div>
   <figure class="shot" id="shot">
-    {img("fabrica-aluminio", "Danilo, CEO do Giquira Group, com parceiros numa fábrica de perfis de alumínio na China", "(max-width:900px) 100vw, 44vw", eager=True)}
-    <figcaption>Danilo, CEO, numa fábrica parceira</figcaption>
-    <div class="track" id="track" aria-hidden="true">
-      <div class="top"><span class="ref">GQ-<i>0421</i></span><span class="stt" id="trst">Em sourcing</span></div>
-      <ol>{"".join(f"<li>{t}</li>" for t in TRACK)}</ol>
-      <div class="prog"><b id="prog"></b></div>
-    </div>
+    {img("fabrica-aluminio", "Luís, CEO do Giquira Group, numa fábrica de alumínio na China", "(max-width:900px) 100vw, 44vw", eager=True)}
+    <figcaption>Luís, CEO, numa fábrica de alumínio na China</figcaption>
   </figure>
 </div></section>
 
-<section class="sec" id="como"><div class="w g2">
-  <div class="sticky"><p class="eyebrow" data-rv>Como funciona</p><h2 data-rv>Do pedido à sua porta.</h2><p class="lead" data-rv style="--i:1">Seis passos e um só responsável. A logística existe para fechar o ciclo: garantir que o que compramos chega inteiro, documentado e no prazo.</p><a class="tlink" data-rv style="--i:2" href="procurement.html">O serviço em detalhe {GO}</a></div>
-  {steps_html()}
+<section class="sec" id="empresa"><div class="w g2">
+  <div class="sticky boxed idbox" data-rv>
+    <p class="eyebrow">O grupo em resumo</p>
+    <dl class="ct">
+      <dt>Grupo</dt><dd>Giquira Group, empresa de família</dd>
+      <dt>Procurement</dt><dd>{COMPAN["name"]}, desde {COMPAN["founded"]}</dd>
+      <dt>Equipa</dt><dd>{COMPAN["team"]} colaboradores</dd>
+      <dt>Sede</dt><dd>{CONTACT["address_1"]}, Maputo</dd>
+    </dl>
+  </div>
+  <div class="prose">
+    <p class="eyebrow" data-rv>Quem somos</p>
+    <h2 data-rv>Uma empresa de família, feita de comércio.</h2>
+    <p data-rv>O Giquira Group é um grupo familiar sediado em Maputo. Nasceu da experiência da família no comércio nacional e internacional, construída em mercados como a África do Sul, os Emirados Árabes Unidos, a China e a Tanzânia.</p>
+    <p data-rv>Hoje trabalhamos em três frentes: procurement, logística e venda de produtos. O procurement, o serviço mais procurado, é feito pela {COMPAN["name"]}, a empresa do grupo criada em {COMPAN["founded"]}.</p>
+    <p data-rv>Mais do que um nome, somos uma família e uma equipa com o mesmo compromisso em cada encomenda.</p>
+    <ul class="chips" data-rv><li>África do Sul</li><li>Emirados Árabes Unidos</li><li>China</li><li>Tanzânia</li></ul>
+    <a class="tlink" data-rv href="sobre.html" style="margin-top:28px">A nossa história {GO}</a>
+  </div>
 </div></section>
+
+<section class="sec alt" id="servicos"><div class="w">
+  <div class="head"><div data-rv><p class="eyebrow">O que fazemos</p><h2>Três serviços, <em>um centro.</em></h2></div><p class="lead" data-rv style="--i:1">O procurement é o coração do grupo. A logística e a loja nasceram dele.</p></div>
+  <div class="svc">
+    <a href="procurement.html" class="card main" data-rv><div data-img>{img("fabrica-aluminio-2", "Visita a uma fábrica de perfis de alumínio", "(max-width:760px) 100vw, 56vw")}</div><div class="t"><span class="badge">Mais procurado</span><span class="k">Serviço principal · {COMPAN["name"]}</span><h3>Procurement</h3><p>Encontramos o fornecedor certo, negociamos por si, acompanhamos a produção e entregamos em Moçambique. Um só responsável, do pedido à entrega.</p><span class="go">Ver o procurement {GO}</span></div></a>
+    <a href="procurement.html#logistica" class="card" data-rv style="--i:1"><div data-img>{img("carregamento-empilhador", "Carregamento de um contentor com empilhador num armazém", "(max-width:760px) 100vw, 40vw")}</div><div class="t"><span class="k">Serviço de apoio</span><h3>Logística</h3><p>Embarque, desalfandegamento e entrega até à sua porta.</p><span class="go">Ver a logística {GO}</span></div></a>
+    <a href="produtos.html" class="card solid" data-rv style="--i:2"><div class="t"><span class="k">Serviço de apoio</span><h3>Venda de produtos</h3><p>Loja física com stock de eletrónica: telemóveis, televisores, colunas, consolas e auriculares.</p><span class="go">Ver produtos {GO}</span></div></a>
+  </div>
+</div></section>
+
+<section class="sec"><div class="w g2">
+  <div class="sticky"><p class="eyebrow" data-rv>Clientes</p><h2 data-rv>Para quem trabalhamos.</h2><p class="lead" data-rv style="--i:1">Quem precisa de comprar fora sem correr riscos, ou de produto em stock já em Moçambique.</p></div>
+  <div class="mv">
+    <div data-rv><h3>PMEs</h3><p>Equipamento, stock e reposição sem ter de viajar nem arriscar com fornecedores desconhecidos.</p></div>
+    <div data-rv><h3>ONGs</h3><p>Compras com especificação clara, documentação completa e prazos cumpridos.</p></div>
+    <div data-rv><h3>Instituições públicas</h3><p>Processos transparentes e rastreáveis, do pedido à entrega.</p></div>
+    <div data-rv><h3>Particulares</h3><p>Mobiliário, eletrodomésticos e eletrónica, por encomenda ou na nossa loja.</p></div>
+  </div>
+</div></section>
+
+{china_html(videos=False)}
+
+{partners_html()}
 
 <section class="sec order" id="pedido"><div class="w g2">
   <div>
@@ -317,32 +354,10 @@ home = f'''<section class="hero"><div class="w hgrid">
   </div>
 </div></section>
 
-{china_html()}
-
-<section class="sec"><div class="w g2">
-  <div class="sticky"><p class="eyebrow" data-rv>Para quem trabalhamos</p><h2 data-rv>Quem precisa de comprar fora, sem correr riscos.</h2></div>
-  <div class="mv">
-    <div data-rv><h3>PMEs</h3><p>Equipamento, stock e reposição sem ter de viajar nem arriscar com fornecedores desconhecidos.</p></div>
-    <div data-rv><h3>ONGs</h3><p>Compras com especificação clara, documentação completa e prazos cumpridos.</p></div>
-    <div data-rv><h3>Instituições</h3><p>Processos transparentes e rastreáveis, do pedido à entrega.</p></div>
-    <div data-rv><h3>Particulares</h3><p>Mobiliário, eletrodomésticos e equipamentos trazidos diretamente da origem.</p></div>
-  </div>
-</div></section>
-
-<section class="sec alt"><div class="w">
-  <div class="head"><div data-rv><p class="eyebrow">Além do procurement</p><h2>Dois serviços que nasceram das nossas compras.</h2></div></div>
-  <div class="pair">
-    <a href="procurement.html#logistica" class="card" data-rv><div data-img>{img("carregamento-empilhador", "Carregamento de um contentor com empilhador num armazém na China", "(max-width:760px) 100vw, 50vw")}</div><div class="t"><span class="k">Serviço de apoio</span><h3>Logística</h3><p>Embarque, desalfandegamento e entrega: a mesma operação que usamos nas nossas compras.</p><span class="go">Ver a logística {GO}</span></div></a>
-    <a href="produtos.html" class="card solid" data-rv style="--i:1"><div class="t"><span class="k">Serviço de apoio</span><h3>Produtos em stock</h3><p>Acessórios de tecnologia e produtos selecionados, prontos a vender em Moçambique.</p><span class="go">Ver produtos {GO}</span></div></a>
-  </div>
-</div></section>
-
-{partners_html()}
-
-{cta_dark("Committed to quality. <em>Committed to you.</em>", "Desde 2021, com experiência de comércio construída na África do Sul, nos Emirados Árabes Unidos, na China e na Tanzânia.")}
+{cta_dark("Committed to quality. <em>Committed to you.</em>", "Um grupo de família, com experiência de comércio construída na África do Sul, nos Emirados Árabes Unidos, na China e na Tanzânia.")}
 '''
-page("index.html", "Giquira Group | Procurement na China para Moçambique",
-     "Encontramos fornecedores, negociamos e acompanhamos a produção na China, e entregamos em Moçambique. Procurement com logística incluída.", home, schema=True)
+page("index.html", "Giquira Group | Procurement, logística e produtos em Moçambique",
+     "Grupo familiar em Maputo: procurement com a Compan Services, logística até Moçambique e loja com stock de eletrónica.", home, schema=True)
 
 # ═════════════════════════ PROCUREMENT ═════════════════════════
 
@@ -361,15 +376,25 @@ LOG = [("Consolidação na origem", "Juntamos a mercadoria de vários fornecedor
        ("Ponto de situação", "Informação regular sobre onde está a sua carga.")]
 proc = f'''<section class="pghero"><div class="w hgrid" style="align-items:end">
   <div>
-    <p class="eyebrow fade" style="--d:0">Serviço principal</p>
-    <h1>{lines("O seu departamento", "de compras <em>na China.</em>")}</h1>
+    <p class="eyebrow fade" style="--d:0">Serviço principal · o mais procurado</p>
+    <h1>{lines("O seu departamento", "de compras <em>lá fora.</em>")}</h1>
   </div>
-  <div class="fade" style="--d:.4"><p class="lead" style="margin-top:0">Gerimos toda a cadeia de aquisição, da procura do fornecedor à entrega final em Moçambique, com foco em qualidade, custo total e prazo. Fala com uma só equipa; nós tratamos do resto.</p><div class="cta"><a class="btn" href="index.html#pedido">Pedir cotação {ARROW}</a><a class="btn o" href="#processo">Ver o processo</a></div></div>
+  <div class="fade" style="--d:.4"><p class="lead" style="margin-top:0">Gerimos toda a cadeia de aquisição: encontramos o fornecedor certo, onde quer que esteja, negociamos, acompanhamos a produção e entregamos em Moçambique. Fala com uma só equipa; nós tratamos do resto.</p><div class="cta"><a class="btn" href="index.html#pedido">Pedir cotação {ARROW}</a><a class="btn o" href="#processo">Ver o processo</a></div></div>
 </div></section>
 
 <section class="w" style="padding-bottom:clamp(64px,9vw,120px)"><div class="duo">
-  <figure data-img>{img("fabrica-aluminio-2", "Danilo com parceiros numa fábrica de perfis de alumínio na China", "(max-width:700px) 55vw, 50vw")}<figcaption>Visita a uma fábrica de perfis de alumínio</figcaption></figure>
-  <figure data-img style="--i:1">{img("fabrica-maquinaria", "Danilo com um parceiro numa fábrica de maquinaria pesada na China", "(max-width:700px) 45vw, 40vw")}<figcaption>Fábrica de maquinaria pesada</figcaption></figure>
+  <figure data-img>{img("fabrica-aluminio-2", "Visita a uma fábrica de perfis de alumínio na China", "(max-width:700px) 55vw, 50vw")}<figcaption>Visita a uma fábrica de perfis de alumínio</figcaption></figure>
+  <figure data-img style="--i:1">{img("fabrica-maquinaria", "Visita a uma fábrica de maquinaria pesada na China", "(max-width:700px) 45vw, 40vw")}<figcaption>Fábrica de maquinaria pesada</figcaption></figure>
+</div></section>
+
+<section class="sec"><div class="w g2">
+  <div class="sticky"><p class="eyebrow" data-rv>Quem faz</p><h2 data-rv>{COMPAN["name"]}</h2><p class="lead" data-rv style="--i:1">A empresa do Giquira Group dedicada ao procurement.</p></div>
+  <div class="prose">
+    <p data-rv>A Compan Services foi criada em {COMPAN["founded"]} por representantes com muita experiência no comércio nacional e internacional, em especial na África do Sul, nos Emirados Árabes Unidos, na China e na Tanzânia.</p>
+    <p data-rv>Fornece mobiliário, eletrodomésticos, equipamentos e sistemas de tecnologia da informação, peças automotivas e peças de reposição industriais a pequenas e médias empresas, ONGs, instituições públicas e particulares.</p>
+    <p data-rv>Conta com {COMPAN["team"]} colaboradores experientes e com o compromisso de um serviço de qualidade, com bons resultados e a máxima satisfação de cada cliente.</p>
+    <ul class="chips" data-rv><li>África do Sul</li><li>Emirados Árabes Unidos</li><li>China</li><li>Tanzânia</li></ul>
+  </div>
 </div></section>
 
 <section class="sec"><div class="w g2">
@@ -378,7 +403,7 @@ proc = f'''<section class="pghero"><div class="w hgrid" style="align-items:end">
 </div></section>
 
 <section class="sec alt" id="processo"><div class="w g2">
-  <div class="sticky"><p class="eyebrow" data-rv>O processo</p><h2 data-rv>Da especificação à entrega.</h2><p class="lead" data-rv style="--i:1">Só compramos depois da sua confirmação. Em cada passo sabe o que está a acontecer.</p></div>
+  <div class="sticky"><p class="eyebrow" data-rv>Como funciona</p><h2 data-rv>Do pedido à sua porta.</h2><p class="lead" data-rv style="--i:1">Só compramos depois da sua confirmação. Em cada passo sabe o que está a acontecer.</p></div>
   {steps_html()}
 </div></section>
 
@@ -400,18 +425,18 @@ proc = f'''<section class="pghero"><div class="w hgrid" style="align-items:end">
   <ul class="rows">{"".join(f'<li data-rv><span class="k">{i+1:02d}</span><span>{t}<span class="d">{d}</span></span></li>' for i, (t, d) in enumerate(LOG))}</ul>
 </div></section>
 
-{china_html(videos=False)}
+{china_html()}
 
 {cta_dark("Diga-nos o que <em>precisa de comprar.</em>", "Envie a lista ou a especificação. Respondemos com uma proposta clara, com produto, preço, prazo e entrega incluídos.", b2=("contactos.html", "Outros contactos"))}
 '''
 page("procurement.html", "Procurement | Giquira Group",
-     "Sourcing de fornecedores na China, negociação, inspeção de qualidade e entrega em Moçambique, com logística incluída.", proc)
+     "Procurement com a Compan Services, Lda: fornecedores qualificados, negociação, inspeção de qualidade e entrega em Moçambique, com logística incluída.", proc)
 
 # ═════════════════════════ PRODUTOS ═════════════════════════
 
-PLINES = [("Acessórios para smartphones", "Capas, cabos e carregadores."), ("Áudio", "Auriculares, colunas Bluetooth e headphones."),
-          ("Wearables", "Smartwatches e acessórios."), ("Periféricos e gadgets", "Para escritório e uso pessoal."),
-          ("Produtos de consumo", "Seleção que vai mudando."), ("Revenda B2B", "Condições para lojas e distribuidores.")]
+PLINES = [("Telemóveis", "Smartphones de várias marcas e gamas."), ("Televisores", "Para casa e para o escritório."),
+          ("Colunas", "Colunas Bluetooth e sistemas de som."), ("Consolas", "Consolas de jogos e comandos."),
+          ("Auriculares", "Com e sem fios, para o dia a dia."), ("Acessórios", "Carregadores, cabos, capas e mais.")]
 
 def gallery_html():
     """Galeria de produtos. Só é gerada quando PRODUCTS tiver itens."""
@@ -430,13 +455,13 @@ def gallery_html():
 
 prod = f'''<section class="pghero"><div class="w">
   <p class="eyebrow fade" style="--d:0">Serviço de apoio · Produtos</p>
-  <h1>{lines("Produtos escolhidos", "<em>na origem.</em>")}</h1>
-  <p class="lead fade" style="--d:.4;max-width:52ch">Com a mesma rede de fornecedores que usamos no procurement, importamos uma seleção de produtos, com destaque para acessórios de tecnologia, que vendemos em Moçambique a particulares e a revendedores.</p>
+  <h1>{lines("Loja com stock,", "<em>pronta a levar.</em>")}</h1>
+  <p class="lead fade" style="--d:.4;max-width:52ch">Temos loja física com stock de eletrónica: telemóveis, televisores, colunas, consolas, auriculares e acessórios. Vendemos a particulares e a revendedores, com a mesma rede de fornecedores que usamos no procurement.</p>
   <div class="cta fade" style="--d:.55"><a class="btn wa" href="{wa("Olá Giquira Group! Que produtos têm disponíveis?")}" target="_blank" rel="noopener">{WA_SVG} Ver disponibilidade</a><a class="btn o" href="procurement.html">Procura outra coisa?</a></div>
 </div></section>
 
 <section class="sec"><div class="w">
-  <div class="head"><div data-rv><p class="eyebrow">Linhas de produto</p><h2>O que costumamos ter.</h2></div><p class="lead" data-rv style="--i:1">O stock muda com frequência. Peça a lista atualizada pelo WhatsApp.</p></div>
+  <div class="head"><div data-rv><p class="eyebrow">Na loja</p><h2>O que temos em stock.</h2></div><p class="lead" data-rv style="--i:1">O stock muda com frequência. Peça a lista atualizada e a localização da loja pelo WhatsApp.</p></div>
   <ul class="cats">{"".join(f'<li data-rv style="--i:{i%3}"><span class="k">{i+1:02d}</span><h3>{t}</h3><p>{d}</p></li>' for i, (t, d) in enumerate(PLINES))}</ul>
 </div></section>
 
@@ -445,24 +470,25 @@ prod = f'''<section class="pghero"><div class="w">
 {cta_dark("Não está aqui? <em>Encontramos.</em>", "É para isso que existe o nosso procurement. Diga-nos o que procura e compramos na origem.", b2=("procurement.html", "Ver procurement"))}
 '''
 page("produtos.html", "Produtos | Giquira Group",
-     "Acessórios de tecnologia e produtos selecionados, importados pelo Giquira Group e disponíveis em Moçambique.", prod)
+     "Loja Giquira Group com stock de eletrónica: telemóveis, televisores, colunas, consolas e auriculares.", prod)
 
 # ═════════════════════════ SOBRE ═════════════════════════
 
 sobre = f'''<section class="pghero"><div class="w">
   <p class="eyebrow fade" style="--d:0">Sobre nós</p>
-  <h1>{lines("Nascemos do comércio", "<em>internacional.</em>")}</h1>
-  <ul class="facts fade" style="--d:.45"><li><b>2021</b><span>Fundação</span></li><li><b>4</b><span>Países</span></li><li><b>5</b><span>Parceiros</span></li><li><b>8</b><span>Colaboradores</span></li></ul>
+  <h1>{lines("Uma família feita", "de <em>comércio.</em>")}</h1>
+  <ul class="facts fade" style="--d:.45"><li><b>2021</b><span>Compan Services</span></li><li><b>4</b><span>Países</span></li><li><b>{len(PARTNERS)}</b><span>Parceiros</span></li><li><b>{COMPAN["team"]}</b><span>Colaboradores</span></li></ul>
 </div></section>
 
 <section class="sec"><div class="w g2">
-  <figure class="portrait sticky" data-img>{img("contentor-danilo", "Danilo, CEO do Giquira Group, em frente a um contentor carregado na China", "(max-width:900px) 100vw, 42vw")}<figcaption>Danilo, fundador e CEO</figcaption></figure>
+  <figure class="portrait sticky" data-img>{img("contentor-carregado", "Contentor carregado com mobiliário à saída de um armazém", "(max-width:900px) 100vw, 42vw")}<figcaption>Uma compra pronta a partir</figcaption></figure>
   <div class="prose">
     <p class="eyebrow" data-rv>A nossa história</p>
     <h2 data-rv>Experiência construída nos mercados de onde as coisas vêm.</h2>
-    <p data-rv>O Giquira Group foi fundado em 2021 com base em experiência profissional em comércio nacional e internacional, construída em mercados como a África do Sul, os Emirados Árabes Unidos, a China e a Tanzânia. Dessa vivência nasceu a convicção de que qualidade e proximidade não são opostas: são as duas faces da mesma moeda.</p>
-    <p data-rv>Hoje o nosso centro é o procurement: compramos mobiliário, eletrodomésticos, equipamentos e sistemas de TI, peças automotivas e peças de reposição industriais para pequenas e médias empresas, ONGs, instituições públicas e particulares.</p>
-    <p data-rv>Somos uma equipa de 8 colaboradores, orientada por processos e guiada por pessoas.</p>
+    <p data-rv>O Giquira Group é uma empresa de família sediada em Maputo. Nasceu da experiência da família no comércio nacional e internacional, construída em mercados como a África do Sul, os Emirados Árabes Unidos, a China e a Tanzânia. Dessa vivência nasceu a convicção de que qualidade e proximidade não são opostas: são as duas faces da mesma moeda.</p>
+    <p data-rv>Em {COMPAN["founded"]} nasceu a {COMPAN["name"]}, o ramo do grupo que faz o procurement: compramos mobiliário, eletrodomésticos, equipamentos e sistemas de TI, peças automotivas e peças de reposição industriais para pequenas e médias empresas, ONGs, instituições públicas e particulares.</p>
+    <p data-rv>À volta do procurement cresceram a logística, que leva cada compra até ao destino, e a loja, com stock de eletrónica pronto a vender.</p>
+    <p data-rv>Somos uma equipa de {COMPAN["team"]} colaboradores, orientada por processos e guiada por pessoas.</p>
     <ul class="chips" data-rv><li>África do Sul</li><li>Emirados Árabes Unidos</li><li>China</li><li>Tanzânia</li></ul>
     <p class="quote" data-rv>{BRAND["slogan"]}</p>
   </div>
@@ -477,14 +503,12 @@ sobre = f'''<section class="pghero"><div class="w">
   </div>
 </div></section>
 
-{china_html()}
-
 {partners_html("Parceiros")}
 
 {cta_dark("Trabalhemos <em>juntos.</em>", "Diga-nos o que precisa de comprar e desenhamos a solução consigo, da origem à entrega.", b2=("contactos.html", "Contactos"))}
 '''
 page("sobre.html", "Sobre nós | Giquira Group",
-     "A história, missão e valores do Giquira Group: procurement internacional sediado em Maputo, com presença na China.", sobre)
+     "A história, missão e valores do Giquira Group: empresa de família em Maputo, com procurement, logística e venda de produtos.", sobre)
 
 # ═════════════════════════ CONTACTOS ═════════════════════════
 
