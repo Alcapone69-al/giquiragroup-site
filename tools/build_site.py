@@ -33,6 +33,16 @@ BRAND = {
     "mark": "media/brand/giquira-simbolo.webp",                   # símbolo sozinho
 }
 
+# Loja física (localização enviada pelo cliente, 12/11/2026)
+STORE = {"lat": -25.962473, "lng": 32.579533}
+def store_maps():
+    return f"https://maps.google.com/?q={STORE['lat']},{STORE['lng']}"
+def store_iframe(title):
+    la, lo = STORE["lat"], STORE["lng"]
+    bbox = f"{lo-0.008:.4f}%2C{la-0.006:.4f}%2C{lo+0.008:.4f}%2C{la+0.006:.4f}"
+    return (f'<iframe title="{title}" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox={bbox}'
+            f'&amp;layer=mapnik&amp;marker={la}%2C{lo}"></iframe>')
+
 # Empresa do grupo que faz o procurement (carta de apresentação, nov. 2026)
 COMPAN = {"name": "Compan Services, Lda", "founded": "novembro de 2021", "team": 8}
 
@@ -457,15 +467,21 @@ prod = f'''<section class="pghero"><div class="w">
   <p class="eyebrow fade" style="--d:0">Serviço de apoio · Produtos</p>
   <h1>{lines("Loja com stock,", "<em>pronta a levar.</em>")}</h1>
   <p class="lead fade" style="--d:.4;max-width:52ch">Temos loja física com stock de eletrónica: telemóveis, televisores, colunas, consolas, auriculares e acessórios. Vendemos a particulares e a revendedores, com a mesma rede de fornecedores que usamos no procurement.</p>
-  <div class="cta fade" style="--d:.55"><a class="btn wa" href="{wa("Olá Giquira Group! Que produtos têm disponíveis?")}" target="_blank" rel="noopener">{WA_SVG} Ver disponibilidade</a><a class="btn o" href="procurement.html">Procura outra coisa?</a></div>
+  <div class="cta fade" style="--d:.55"><a class="btn wa" href="{wa("Olá Giquira Group! Que produtos têm disponíveis?")}" target="_blank" rel="noopener">{WA_SVG} Ver disponibilidade</a><a class="btn o" href="#loja">Onde fica a loja</a></div>
 </div></section>
 
 <section class="sec"><div class="w">
-  <div class="head"><div data-rv><p class="eyebrow">Na loja</p><h2>O que temos em stock.</h2></div><p class="lead" data-rv style="--i:1">O stock muda com frequência. Peça a lista atualizada e a localização da loja pelo WhatsApp.</p></div>
+  <div class="head"><div data-rv><p class="eyebrow">Na loja</p><h2>O que temos em stock.</h2></div><p class="lead" data-rv style="--i:1">O stock muda com frequência. Peça a lista atualizada pelo WhatsApp.</p></div>
   <ul class="cats">{"".join(f'<li data-rv style="--i:{i%3}"><span class="k">{i+1:02d}</span><h3>{t}</h3><p>{d}</p></li>' for i, (t, d) in enumerate(PLINES))}</ul>
 </div></section>
 
 {gallery_html()}
+
+<section class="sec alt" id="loja"><div class="w g2">
+  <div class="sticky"><p class="eyebrow" data-rv>A loja</p><h2 data-rv>Venha ver o stock.</h2><p class="lead" data-rv style="--i:1">Antes de vir, confirme pelo WhatsApp se o produto que procura está disponível.</p>
+    <div class="cta" data-rv style="--i:2"><a class="btn" href="{store_maps()}" target="_blank" rel="noopener">Abrir no Google Maps {ARROW}</a><a class="btn wa" href="{wa("Olá Giquira Group! Gostaria de saber se têm este produto na loja.")}" target="_blank" rel="noopener">{WA_SVG} Confirmar stock</a></div></div>
+  <div class="map" data-rv style="margin-top:0">{store_iframe("Mapa da loja do Giquira Group em Maputo")}</div>
+</div></section>
 
 {cta_dark("Não está aqui? <em>Encontramos.</em>", "É para isso que existe o nosso procurement. Diga-nos o que procura e compramos na origem.", b2=("procurement.html", "Ver procurement"))}
 '''
@@ -525,6 +541,7 @@ cont = f'''<section class="pghero"><div class="w">
       <dt>Email</dt><dd><a href="mailto:{CONTACT["email"]}">{CONTACT["email"]}</a></dd>
       <dt>Instagram</dt><dd><a href="https://instagram.com/{CONTACT["instagram"]}" target="_blank" rel="noopener">@{CONTACT["instagram"]}</a></dd>
       <dt>Escritório</dt><dd>{CONTACT["address_1"]}<br>{CONTACT["address_2"]}</dd>
+      <dt>Loja</dt><dd><a href="{store_maps()}" target="_blank" rel="noopener">Ver a loja no Google Maps</a></dd>
     </dl>
     <div class="map"><iframe title="Mapa do escritório do Giquira Group em Maputo" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=32.5750%2C-25.9700%2C32.6150%2C-25.9450&amp;layer=mapnik&amp;marker=-25.9575%2C32.5950"></iframe></div>
   </div>
