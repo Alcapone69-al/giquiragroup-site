@@ -71,6 +71,13 @@ NAV = [("index.html", "Início"), ("procurement.html", "Procurement"), ("produto
 
 # ═════════════════════════ AUXILIARES ═════════════════════════
 
+import hashlib
+def ver(path):
+    """Versão do ficheiro (muda sempre que o conteúdo muda), para o browser não usar uma cópia antiga."""
+    with open(os.path.join(OUT, path), "rb") as f:
+        return hashlib.sha1(f.read()).hexdigest()[:8]
+CSS_V, JS_V = ver("assets/site.css"), ver("assets/site.js")
+
 ARROW = '<svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>'
 WA_SVG = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1-.7-.3-1.5-.8-2.1-1.4-.6-.6-1-1.2-1.4-1.9-.1-.2 0-.4.1-.5l.4-.5.2-.4c.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.7.7-1 1.6-.9 2.5.2 1 .7 1.9 1.3 2.7 1.3 1.7 2.9 2.9 4.9 3.5.9.3 1.7.2 2.3-.1.7-.4 1.1-1 1.3-1.7.1-.3 0-.5-.1-.6z"/></svg>'
 PLAY = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 1.8v12.4L14 8z"/></svg>'
@@ -143,7 +150,7 @@ def page(fname, title, desc, body, schema=False):
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preload" href="assets/fonts/schibsted-grotesk-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/instrument-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/site.css?v={CSS_V}">
 <script>(function(d){{d.className+=' js';try{{if(sessionStorage.getItem('wp'))d.className+=' wp';else d.className+=' first'}}catch(e){{d.className+=' first'}}}})(document.documentElement)</script>
 {ld}</head>
 <body data-wa="{CONTACT["wa_main"]}">
@@ -190,7 +197,7 @@ def page(fname, title, desc, body, schema=False):
   <div class="legal"><span>© <span data-year>2026</span> Giquira Group · Maputo, Moçambique</span><span>{BRAND["slogan"]}</span></div>
 </div></footer>
 <a class="btn wa fab" href="{wa("Olá Giquira Group! Gostaria de falar com a vossa equipa.")}" target="_blank" rel="noopener" aria-label="Falar com o Giquira Group no WhatsApp">{WA_SVG}<span>WhatsApp</span></a>
-<script src="assets/site.js" defer></script>
+<script src="assets/site.js?v={JS_V}" defer></script>
 </body>
 </html>
 '''
@@ -561,7 +568,7 @@ B = BASE_PATH if BASE_PATH.endswith("/") else BASE_PATH + "/"
 with open(os.path.join(OUT, "404.html"), "w") as f:
     f.write(f'''<!doctype html><html lang="pt-MZ"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Página não encontrada | Giquira Group</title><meta name="robots" content="noindex"><base href="{B}"><link rel="icon" href="favicon.png">
-<link rel="stylesheet" href="assets/site.css"></head><body><main class="w pghero" style="min-height:80vh;display:grid;align-content:center">
+<link rel="stylesheet" href="assets/site.css?v={CSS_V}"></head><body><main class="w pghero" style="min-height:80vh;display:grid;align-content:center">
 <p class="eyebrow">Erro 404</p><h1>Esta página <em>não existe.</em></h1><p class="lead" style="margin-top:24px">O endereço pode estar errado ou a página foi movida.</p>
 <div class="cta"><a class="btn" href="index.html">Voltar ao início</a><a class="btn o" href="contactos.html">Contactos</a></div></main></body></html>
 ''')
