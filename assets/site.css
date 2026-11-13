@@ -304,6 +304,41 @@ textarea{resize:vertical;min-height:96px}
 .card.solid h3{font-size:clamp(26px,2.6vw,34px)}
 @media(max-width:760px){.pair{grid-template-columns:1fr}.card.solid .t{min-height:240px}}
 
+/* Quadro do processo: por baixo da foto, sem a tapar */
+.track{position:relative;margin-top:12px;background:var(--dark);color:var(--dark-ink);padding:18px 20px 16px;border-radius:var(--r);opacity:0;transform:translateY(16px);animation:fadeup .8s var(--ease) 1.25s forwards}
+html.first .track{animation-delay:.9s}
+.track .top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.track .ref{font:600 22px/1 var(--h);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.track .ref i{font-style:normal;color:var(--g-on-dark)}
+.track .stt{font:600 12px/1 var(--b);color:var(--dark);background:var(--g-on-dark);padding:6px 10px;border-radius:999px}
+.track ol{list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px 12px}
+.track li{display:grid;grid-template-columns:12px 1fr;gap:10px;align-items:center;font-size:14px;color:var(--dark-mut);transition:color .4s}
+.track li::before{content:"";width:9px;height:9px;border:1.5px solid #ffffff55;border-radius:50%;transition:all .4s var(--ease)}
+.track li.done{color:var(--dark-ink)}
+.track li.done::before{background:var(--g-on-dark);border-color:var(--g-on-dark)}
+.track li.now{color:#fff;font-weight:500}
+.track li.now::before{border-color:var(--g-on-dark);box-shadow:0 0 0 4px #96d67033;animation:pulse 1.4s infinite}
+.track .prog{height:2px;background:#ffffff1f;margin-top:16px;overflow:hidden;border-radius:2px}
+.track .prog b{display:block;height:100%;background:var(--g-on-dark);transform-origin:0 50%;transform:scaleX(0);transition:transform .9s var(--ease)}
+@media(max-width:420px){.track ol{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* Carrossel da loja (avança sozinho e volta ao início) */
+.pcar{position:relative;outline:none}
+.pcar:focus-visible{box-shadow:0 0 0 2px var(--g);border-radius:var(--r)}
+.pcar .vp{overflow:hidden}
+.pcar .tr{display:flex;margin:0 0 0 -14px;padding:0;list-style:none;transition:transform .7s var(--ease);will-change:transform}
+.pcar .it{flex:0 0 25%;min-width:0;padding-left:14px}
+.pcar .tile{aspect-ratio:1;border-radius:var(--r);background:var(--surface);border:1px solid var(--line);display:flex;flex-direction:column;justify-content:flex-end;padding:20px;overflow:hidden}
+.pcar .tile.ph{padding:0;background:var(--g-soft)}
+.pcar .tile.ph img{width:100%;height:100%;object-fit:cover}
+.pcar .tile .k,.pcar .cap .k{font:600 13px var(--h);color:var(--g-deep);margin-bottom:auto}
+.pcar .tile h3{margin:0 0 4px;font-size:clamp(18px,1.6vw,22px)}
+.pcar .tile p{margin:0;color:var(--mut);font-size:14.5px;line-height:1.45}
+.pcar .cap{padding:12px 2px 0}.pcar .cap h3{margin:2px 0;font-size:17px}.pcar .cap b{font-size:15px}
+@media(min-width:1100px){.pcar .it{flex-basis:calc(100%/5)}}
+@media(max-width:900px){.pcar .it{flex-basis:calc(100%/3)}}
+@media(max-width:600px){.pcar .it{flex-basis:50%}.pcar .tile{padding:16px}}
+
 /* Serviços do início: procurement em destaque */
 .svc{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);grid-template-rows:auto auto;gap:14px}
 .svc .card.main{grid-row:span 2}

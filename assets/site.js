@@ -216,4 +216,22 @@ if(fab&&'IntersectionObserver' in window){
 }
 
 $$('[data-year]').forEach(function(e){e.textContent=new Date().getFullYear()});
+/* ── carrossel da loja: avança um item de cada vez e volta ao início ───── */
+[].forEach.call(document.querySelectorAll('[data-car]'),function(car){
+  var tr=car.querySelector('.tr'),its=car.querySelectorAll('.it'),i=0,tid=null,vis=true;
+  if(!tr||its.length<2)return;
+  var per=function(){var w=its[0].getBoundingClientRect().width;return w?Math.max(1,Math.round(car.getBoundingClientRect().width/w)):1};
+  var go=function(n){var max=Math.max(0,its.length-per());i=n>max?0:(n<0?max:n);tr.style.transform='translateX('+(-its[0].offsetWidth*i)+'px)'};
+  var run=function(){if(tid||RM)return;tid=setInterval(function(){if(vis)go(i+1)},2200)};
+  var stop=function(){clearInterval(tid);tid=null};
+  car.addEventListener('mouseenter',stop);car.addEventListener('mouseleave',run);
+  car.addEventListener('focusin',stop);car.addEventListener('focusout',run);
+  car.addEventListener('keydown',function(e){if(e.key==='ArrowRight'){e.preventDefault();go(i+1)}else if(e.key==='ArrowLeft'){e.preventDefault();go(i-1)}});
+  var x0=null;car.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;stop()},{passive:true});
+  car.addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40)go(i+(dx<0?1:-1));x0=null;run()});
+  window.addEventListener('resize',function(){go(i)});
+  if('IntersectionObserver' in window)new IntersectionObserver(function(e){vis=e[0].isIntersecting}).observe(car);
+  run();
+});
 })();
+

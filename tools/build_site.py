@@ -274,33 +274,29 @@ GO = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4"
 
 # ═════════════════════════ INÍCIO ═════════════════════════
 
+TRACK = ["Fábrica", "Negociação", "Produção", "Inspeção", "Embarque", "Entrega"]
 home = f'''<section class="hero"><div class="w hgrid">
   <div>
-    <p class="eyebrow fade" style="--d:0">Empresa de família · Maputo</p>
+    <p class="eyebrow fade" style="--d:0">Procurement · Logística · Produtos</p>
     <h1>{lines("Um grupo de família.", "Um só <em>parceiro.</em>")}</h1>
-    <p class="lead fade" style="--d:.35">O Giquira Group encontra o fornecedor certo, onde quer que ele esteja, trata do transporte até Moçambique e tem loja com stock para quem precisa já.</p>
+    <p class="lead fade" style="--d:.35">O Giquira Group encontra o fornecedor certo, onde quer que ele esteja, e trata do transporte até Moçambique.</p>
     <div class="cta fade" style="--d:.5"><a class="btn" href="#pedido">Pedir cotação {ARROW}</a><a class="btn o" href="#servicos">Ver os serviços</a></div>
     <ul class="facts fade" style="--d:.65"><li><b>3</b><span>Áreas de negócio</span></li><li><b>4</b><span>Países</span></li><li><b>{COMPAN["team"]}</b><span>Colaboradores</span></li></ul>
   </div>
   <figure class="shot" id="shot">
     {img("fabrica-aluminio", "Luís, CEO do Giquira Group, numa fábrica de alumínio na China", "(max-width:900px) 100vw, 44vw", eager=True)}
     <figcaption>Luís, CEO, numa fábrica de alumínio na China</figcaption>
+    <div class="track" id="track" aria-hidden="true">
+      <div class="top"><span class="ref">GQ-<i>0421</i></span><span class="stt" id="trst">Em sourcing</span></div>
+      <ol>{"".join(f"<li>{t}</li>" for t in TRACK)}</ol>
+      <div class="prog"><b id="prog"></b></div>
+    </div>
   </figure>
 </div></section>
 
 <section class="sec" id="empresa"><div class="w g2">
-  <div class="sticky boxed idbox" data-rv>
-    <p class="eyebrow">O grupo em resumo</p>
-    <dl class="ct">
-      <dt>Grupo</dt><dd>Giquira Group, empresa de família</dd>
-      <dt>Procurement</dt><dd>{COMPAN["name"]}, desde {COMPAN["founded"]}</dd>
-      <dt>Equipa</dt><dd>{COMPAN["team"]} colaboradores</dd>
-      <dt>Sede</dt><dd>{CONTACT["address_1"]}, Maputo</dd>
-    </dl>
-  </div>
+  <div class="sticky"><p class="eyebrow" data-rv>Quem somos</p><h2 data-rv>Uma empresa de família, feita de comércio.</h2></div>
   <div class="prose">
-    <p class="eyebrow" data-rv>Quem somos</p>
-    <h2 data-rv>Uma empresa de família, feita de comércio.</h2>
     <p data-rv>O Giquira Group é um grupo familiar sediado em Maputo. Nasceu da experiência da família no comércio nacional e internacional, construída em mercados como a África do Sul, os Emirados Árabes Unidos, a China e a Tanzânia.</p>
     <p data-rv>Hoje trabalhamos em três frentes: procurement, logística e venda de produtos. O procurement, o serviço mais procurado, é feito pela {COMPAN["name"]}, a empresa do grupo criada em {COMPAN["founded"]}.</p>
     <p data-rv>Mais do que um nome, somos uma família e uma equipa com o mesmo compromisso em cada encomenda.</p>
@@ -448,20 +444,22 @@ PLINES = [("Telemóveis", "Smartphones de várias marcas e gamas."), ("Televisor
           ("Colunas", "Colunas Bluetooth e sistemas de som."), ("Consolas", "Consolas de jogos e comandos."),
           ("Auriculares", "Com e sem fios, para o dia a dia."), ("Acessórios", "Carregadores, cabos, capas e mais.")]
 
-def gallery_html():
-    """Galeria de produtos. Só é gerada quando PRODUCTS tiver itens."""
-    if not PRODUCTS:
-        return ""
+def carousel_html():
+    """Carrossel infinito da loja (inspirado no componente "cases with infinite scroll").
+    Com PRODUCTS vazio mostra as categorias; quando chegar a lista de stock, mostra cada produto com foto."""
     items = ""
-    for i, p in enumerate(PRODUCTS):
-        price = f'<p><b>{H.escape(p["price"])}</b></p>' if p.get("price") else ""
-        cat = f' data-cat="{H.escape(p["category"])}"' if p.get("category") else ""
-        items += (f'<li data-rv style="--i:{i%4}"{cat}><div class="ph"><img src="{p["image"]}" alt="{H.escape(p.get("alt") or p["name"])}" loading="lazy"></div>'
-                  f'<div class="t"><h3>{H.escape(p["name"])}</h3>{"<p>" + H.escape(p["desc"]) + "</p>" if p.get("desc") else ""}{price}</div></li>')
-    return f'''<section class="sec alt" id="galeria"><div class="w">
-  <div class="head"><div data-rv><p class="eyebrow">Galeria</p><h2>Alguns dos nossos produtos.</h2></div></div>
-  <ul class="gal">{items}</ul>
-</div></section>'''
+    if PRODUCTS:
+        for p in PRODUCTS:
+            price = f'<b>{H.escape(p["price"])}</b>' if p.get("price") else ""
+            cat = f'<span class="k">{H.escape(p["category"])}</span>' if p.get("category") else ""
+            items += (f'<li class="it"><div class="tile ph"><img src="{p["image"]}" alt="{H.escape(p.get("alt") or p["name"])}" loading="lazy"></div>'
+                      f'<div class="cap">{cat}<h3>{H.escape(p["name"])}</h3>{price}</div></li>')
+    else:
+        for i, (t, d) in enumerate(PLINES):
+            items += (f'<li class="it"><div class="tile"><span class="k">{i+1:02d}</span><h3>{t}</h3><p>{d}</p></div></li>')
+    return f'''<div class="pcar" data-car role="region" aria-roledescription="carrossel" aria-label="Produtos em stock" tabindex="0">
+    <div class="vp"><ul class="tr">{items}</ul></div>
+  </div>'''
 
 prod = f'''<section class="pghero"><div class="w">
   <p class="eyebrow fade" style="--d:0">Serviço de apoio · Produtos</p>
@@ -472,10 +470,8 @@ prod = f'''<section class="pghero"><div class="w">
 
 <section class="sec"><div class="w">
   <div class="head"><div data-rv><p class="eyebrow">Na loja</p><h2>O que temos em stock.</h2></div><p class="lead" data-rv style="--i:1">O stock muda com frequência. Peça a lista atualizada pelo WhatsApp.</p></div>
-  <ul class="cats">{"".join(f'<li data-rv style="--i:{i%3}"><span class="k">{i+1:02d}</span><h3>{t}</h3><p>{d}</p></li>' for i, (t, d) in enumerate(PLINES))}</ul>
+  {carousel_html()}
 </div></section>
-
-{gallery_html()}
 
 <section class="sec alt" id="loja"><div class="w g2">
   <div class="sticky"><p class="eyebrow" data-rv>A loja</p><h2 data-rv>Venha ver o stock.</h2><p class="lead" data-rv style="--i:1">Antes de vir, confirme pelo WhatsApp se o produto que procura está disponível.</p>

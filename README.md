@@ -37,7 +37,7 @@ Configuração em `BRAND` (tools/build_site.py). Se chegar uma versão vetorial 
 
 Logótipos em `media/logos/`, configurados em `PARTNERS`.
 
-## Galeria de produtos (preparada, vazia)
+## Produtos da loja (carrossel)
 
-Acrescentar itens a `PRODUCTS` (nome, descrição, preço opcional, categoria opcional, fotografia). A secção só aparece
-quando houver produtos.
+Acrescentar itens a `PRODUCTS` (nome, preço opcional, categoria opcional, fotografia). O carrossel da loja (página Produtos)
+passa a mostrar cada produto; enquanto a lista estiver vazia, mostra as categorias.
