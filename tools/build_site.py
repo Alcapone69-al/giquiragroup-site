@@ -447,26 +447,38 @@ page("procurement.html", "Procurement | Giquira Group",
 
 # ═════════════════════════ PRODUTOS ═════════════════════════
 
-PLINES = [("Telemóveis", "Smartphones de várias marcas e gamas."), ("Televisores", "Para casa e para o escritório."),
-          ("Colunas", "Colunas Bluetooth e sistemas de som."), ("Consolas", "Consolas de jogos e comandos."),
-          ("Auriculares", "Com e sem fios, para o dia a dia."), ("Acessórios", "Carregadores, cabos, capas e mais.")]
+PLINES = [("telemoveis", "Telemóveis", "Smartphones de várias marcas e gamas."), ("televisores", "Televisores", "Para casa e para o escritório."),
+          ("colunas", "Colunas", "Colunas Bluetooth e sistemas de som."), ("consolas", "Consolas", "Consolas de jogos e comandos."),
+          ("auriculares", "Auriculares", "Com e sem fios, para o dia a dia."), ("acessorios", "Acessórios", "Carregadores, cabos, capas e mais.")]
+# Cada produto de PRODUCTS deve ter "category" igual a um destes nomes (ex.: "Telemóveis") para aparecer na lista certa.
 
 def carousel_html():
-    """Carrossel infinito da loja (inspirado no componente "cases with infinite scroll").
-    Com PRODUCTS vazio mostra as categorias; quando chegar a lista de stock, mostra cada produto com foto."""
-    items = ""
-    if PRODUCTS:
-        for p in PRODUCTS:
-            price = f'<b>{H.escape(p["price"])}</b>' if p.get("price") else ""
-            cat = f'<span class="k">{H.escape(p["category"])}</span>' if p.get("category") else ""
-            items += (f'<li class="it"><div class="tile ph"><img src="{p["image"]}" alt="{H.escape(p.get("alt") or p["name"])}" loading="lazy"></div>'
-                      f'<div class="cap">{cat}<h3>{H.escape(p["name"])}</h3>{price}</div></li>')
-    else:
-        for i, (t, d) in enumerate(PLINES):
-            items += (f'<li class="it"><div class="tile"><span class="k">{i+1:02d}</span><h3>{t}</h3><p>{d}</p></div></li>')
-    return f'''<div class="pcar" data-car role="region" aria-roledescription="carrossel" aria-label="Produtos em stock" tabindex="0">
+    """Carrossel infinito das 6 categorias da loja. Clicar numa categoria abre a lista dessa secção logo abaixo."""
+    items = "".join(
+        f'<li class="it"><button type="button" class="tile" data-open="{sl}" aria-expanded="false" aria-controls="cat-{sl}">'
+        f'<span class="k">{i+1:02d}</span><h3>{t}</h3><p>{d}</p><span class="more">Ver produtos {GO}</span></button></li>'
+        for i, (sl, t, d) in enumerate(PLINES))
+    return f'''<div class="pcar" data-car role="region" aria-roledescription="carrossel" aria-label="Categorias da loja">
     <div class="vp"><ul class="tr">{items}</ul></div>
   </div>'''
+
+def cat_panels_html():
+    """Uma lista por categoria, escondida até se clicar na categoria."""
+    out = ""
+    for sl, t, d in PLINES:
+        prods = [p for p in PRODUCTS if (p.get("category") or "").strip().lower() == t.lower()]
+        if prods:
+            body = '<ul class="gal">' + "".join(
+                f'<li><div class="ph"><img src="{p["image"]}" alt="{H.escape(p.get("alt") or p["name"])}" loading="lazy"></div>'
+                f'<div class="t"><h3>{H.escape(p["name"])}</h3>{"<p>" + H.escape(p["desc"]) + "</p>" if p.get("desc") else ""}'
+                f'{"<p><b>" + H.escape(p["price"]) + "</b></p>" if p.get("price") else ""}</div></li>' for p in prods) + "</ul>"
+        else:
+            body = (f'<div class="empty"><p>A lista de {t.lower()} em stock vai estar aqui em breve. Até lá, pergunte-nos o que temos neste momento.</p>'
+                    f'<a class="btn wa" href="{wa("Olá Giquira Group! Que " + t.lower() + " têm em stock?")}" target="_blank" rel="noopener">{WA_SVG} Perguntar por {t.lower()}</a></div>')
+        out += (f'<div class="cpanel" id="cat-{sl}" hidden tabindex="-1" aria-label="{t}">'
+                f'<div class="cph"><div><p class="eyebrow">Na loja</p><h3>{t}</h3></div>'
+                f'<button type="button" class="cclose" data-close aria-label="Fechar a lista de {t.lower()}">Fechar ✕</button></div>{body}</div>')
+    return f'<div class="cpanels" id="lista">{out}</div>'
 
 prod = f'''<section class="pghero"><div class="w">
   <p class="eyebrow fade" style="--d:0">Serviço de apoio · Produtos</p>
@@ -476,8 +488,9 @@ prod = f'''<section class="pghero"><div class="w">
 </div></section>
 
 <section class="sec"><div class="w">
-  <div class="head"><div data-rv><p class="eyebrow">Na loja</p><h2>O que temos em stock.</h2></div><p class="lead" data-rv style="--i:1">O stock muda com frequência. Peça a lista atualizada pelo WhatsApp.</p></div>
+  <div class="head"><div data-rv><p class="eyebrow">Na loja</p><h2>O que temos em stock.</h2></div><p class="lead" data-rv style="--i:1">Toque numa categoria para ver os produtos dessa secção.</p></div>
   {carousel_html()}
+  {cat_panels_html()}
 </div></section>
 
 <section class="sec alt" id="loja"><div class="w g2">

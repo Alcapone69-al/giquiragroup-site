@@ -222,7 +222,7 @@ $$('[data-year]').forEach(function(e){e.textContent=new Date().getFullYear()});
   if(!tr||its.length<2)return;
   var per=function(){var w=its[0].getBoundingClientRect().width;return w?Math.max(1,Math.round(car.getBoundingClientRect().width/w)):1};
   var go=function(n){var max=Math.max(0,its.length-per());i=n>max?0:(n<0?max:n);tr.style.transform='translateX('+(-its[0].offsetWidth*i)+'px)'};
-  var run=function(){if(tid||RM)return;tid=setInterval(function(){if(vis)go(i+1)},2200)};
+  var run=function(){if(tid||RM||car._hold)return;tid=setInterval(function(){if(vis)go(i+1)},2200)};
   var stop=function(){clearInterval(tid);tid=null};
   car.addEventListener('mouseenter',stop);car.addEventListener('mouseleave',run);
   car.addEventListener('focusin',stop);car.addEventListener('focusout',run);
@@ -232,6 +232,27 @@ $$('[data-year]').forEach(function(e){e.textContent=new Date().getFullYear()});
   window.addEventListener('resize',function(){go(i)});
   if('IntersectionObserver' in window)new IntersectionObserver(function(e){vis=e[0].isIntersecting}).observe(car);
   run();
+  car._stop=stop;car._run=run;
 });
+
+/* ── lista de cada categoria: abre ao clicar e a página acompanha ───────── */
+(function(){
+  var btns=[].slice.call(document.querySelectorAll('[data-open]'));if(!btns.length)return;
+  var car=document.querySelector('[data-car]');
+  var open=function(sl,scroll){
+    var pn=document.getElementById('cat-'+sl);if(!pn)return;
+    [].forEach.call(document.querySelectorAll('.cpanel'),function(p){p.hidden=p!==pn});
+    btns.forEach(function(b){b.setAttribute('aria-expanded',b.getAttribute('data-open')===sl?'true':'false')});
+    if(car){car._hold=true;if(car._stop)car._stop()}
+    if(scroll!==false){pn.scrollIntoView({behavior:RM?'auto':'smooth',block:'start'});setTimeout(function(){pn.focus({preventScroll:true})},RM?0:600)}
+    try{history.replaceState(null,'','#'+sl)}catch(e){}
+  };
+  var close=function(pn){pn.hidden=true;btns.forEach(function(b){b.setAttribute('aria-expanded','false')});
+    try{history.replaceState(null,'',location.pathname)}catch(e){}
+    if(car){car._hold=false;car.scrollIntoView({behavior:RM?'auto':'smooth',block:'center'});if(car._run)car._run()}};
+  btns.forEach(function(b){b.addEventListener('click',function(){open(b.getAttribute('data-open'))})});
+  [].forEach.call(document.querySelectorAll('[data-close]'),function(c){c.addEventListener('click',function(){close(c.closest('.cpanel'))})});
+  var h=location.hash.replace('#','');if(h&&document.getElementById('cat-'+h))setTimeout(function(){open(h)},300);
+})();
 })();
 
