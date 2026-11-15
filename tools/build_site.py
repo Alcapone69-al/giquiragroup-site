@@ -494,7 +494,7 @@ prod = f'''<section class="pghero"><div class="w">
 </div></section>
 
 <section class="sec alt" id="loja"><div class="w g2">
-  <div class="sticky"><p class="eyebrow" data-rv>A loja</p><h2 data-rv>Venha ver o stock.</h2><p class="lead" data-rv style="--i:1">Antes de vir, confirme pelo WhatsApp se o produto que procura está disponível.</p>
+  <div class="sticky"><p class="eyebrow" data-rv>A loja</p><h2 data-rv>Venha ver o stock.</h2><p class="lead" data-rv style="--i:1">Fica ao lado do nosso escritório, na {CONTACT["address_1"]}, antes da Alof Palm, em Maputo. Antes de vir, confirme pelo WhatsApp se o produto que procura está disponível.</p>
     <div class="cta" data-rv style="--i:2"><a class="btn" href="{store_maps()}" target="_blank" rel="noopener">Abrir no Google Maps {ARROW}</a><a class="btn wa" href="{wa("Olá Giquira Group! Gostaria de saber se têm este produto na loja.")}" target="_blank" rel="noopener">{WA_SVG} Confirmar stock</a></div></div>
   <div class="map" data-rv style="margin-top:0">{store_iframe("Mapa da loja do Giquira Group em Maputo")}</div>
 </div></section>
@@ -556,10 +556,9 @@ cont = f'''<section class="pghero"><div class="w">
       <dt>WhatsApp e telefone</dt><dd><a href="{wa(num=CONTACT["wa_main"])}" target="_blank" rel="noopener">{CONTACT["wa_main_label"]}</a><br><a href="{wa(num=CONTACT["wa_alt"])}" target="_blank" rel="noopener">{CONTACT["wa_alt_label"]}</a></dd>
       <dt>Email</dt><dd><a href="mailto:{CONTACT["email"]}">{CONTACT["email"]}</a></dd>
       <dt>Instagram</dt><dd><a href="https://instagram.com/{CONTACT["instagram"]}" target="_blank" rel="noopener">@{CONTACT["instagram"]}</a></dd>
-      <dt>Escritório</dt><dd>{CONTACT["address_1"]}<br>{CONTACT["address_2"]}</dd>
-      <dt>Loja</dt><dd><a href="{store_maps()}" target="_blank" rel="noopener">Ver a loja no Google Maps</a></dd>
+      <dt>Escritório e loja</dt><dd>{CONTACT["address_1"]}<br>{CONTACT["address_2"]}<br><a href="{store_maps()}" target="_blank" rel="noopener">Abrir no Google Maps</a></dd>
     </dl>
-    <div class="map"><iframe title="Mapa do escritório do Giquira Group em Maputo" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=32.5750%2C-25.9700%2C32.6150%2C-25.9450&amp;layer=mapnik&amp;marker=-25.9575%2C32.5950"></iframe></div>
+    <div class="map">{store_iframe("Mapa do escritório e da loja do Giquira Group em Maputo")}</div>
   </div>
   <div class="boxed" data-rv style="--i:1">
     <p class="eyebrow">Mensagem rápida</p>
