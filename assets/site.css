@@ -346,7 +346,7 @@ html.first .track{animation-delay:.9s}
 .prods{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin:0;padding:0;list-style:none}
 .pc{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--bg)}
 .pt{aspect-ratio:1;display:flex;flex-direction:column;justify-content:space-between;padding:18px;background:linear-gradient(150deg,var(--g-soft),var(--surface) 70%);border-bottom:1px solid var(--line)}
-.pt.ph{padding:0;background:#fff}.pt.ph img{width:100%;height:100%;object-fit:contain}
+.pt.ph{padding:0;background:#fff}.pt.ph img{width:100%;height:100%;object-fit:cover}
 .pt .br{font:600 13px var(--b);color:var(--g-deep);letter-spacing:.02em;text-transform:uppercase}
 .pt b{font:600 clamp(28px,3vw,38px)/1.05 var(--h);letter-spacing:-.03em;color:var(--ink)}
 .pc .t{padding:16px;display:flex;flex-direction:column;gap:8px;flex:1}
