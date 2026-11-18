@@ -376,7 +376,7 @@ home = f'''<section class="hero"><div class="w hgrid">
   </div>
 </div></section>
 
-{china_html(videos=False)}
+{china_html()}
 
 {partners_html()}
 
