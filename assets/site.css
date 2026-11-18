@@ -326,9 +326,19 @@ html.first .track{animation-delay:.9s}
 /* Carrossel da loja (avança sozinho e volta ao início) */
 .pcar{position:relative;outline:none}
 .pcar:focus-visible{box-shadow:0 0 0 2px var(--g);border-radius:var(--r)}
-.pcar .vp{overflow:hidden}
-.pcar .tr{display:flex;margin:0 0 0 -14px;padding:0;list-style:none;transition:transform .7s var(--ease);will-change:transform}
-.pcar .it{flex:0 0 25%;min-width:0;padding-left:14px}
+.pcar .vp{overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none;cursor:grab;-webkit-overflow-scrolling:touch}
+.pcar .vp::-webkit-scrollbar{display:none}
+.pcar .vp.drag{scroll-snap-type:none;cursor:grabbing;user-select:none}
+.pcar .vp.drag .tile{pointer-events:none}
+.pcar .it{scroll-snap-align:start}
+.cnav{display:flex;justify-content:flex-end;gap:8px;margin:-8px 0 14px}
+.cnav button{width:44px;height:44px;border-radius:999px;border:1px solid var(--line-2);background:var(--surface);color:var(--ink);display:grid;place-items:center;cursor:pointer;transition:background .25s,border-color .25s,opacity .25s}
+.cnav button:hover:not(:disabled){background:var(--g-soft);border-color:var(--g)}
+.cnav button:disabled{opacity:.35;cursor:default}
+.cnav svg{width:18px;height:18px}
+.cnav .hint{margin-right:auto;align-self:center;font-size:13.5px;color:var(--mut)}
+.pcar .tr{display:flex;margin:0;padding:0;list-style:none}
+.pcar .it{flex:0 0 25%;min-width:0;padding-right:14px}
 .pcar .tile{aspect-ratio:1;width:100%;border-radius:var(--r);background:var(--surface);border:1px solid var(--line);display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;text-align:left;padding:20px;overflow:hidden;font:inherit;color:inherit;cursor:pointer;transition:background .35s,border-color .35s}
 .pcar .tile:hover,.pcar .tile[aria-expanded="true"]{background:var(--g-soft);border-color:var(--g)}
 .pcar .tile:focus-visible{outline:2px solid var(--g);outline-offset:2px}

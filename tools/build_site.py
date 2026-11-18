@@ -525,8 +525,11 @@ def carousel_html():
         f'<span class="k">{i+1:02d}{(" · " + str(n) + (" modelos" if n > 1 else " modelo")) if (n := len(prods_of(t))) else ""}</span>'
         f'<h3>{t}</h3><p>{d}</p><span class="more">Ver produtos {GO}</span></button></li>'
         for i, (sl, t, d) in enumerate(PLINES))
+    L = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+    R = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m6 3 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>'
     return f'''<div class="pcar" data-car role="region" aria-roledescription="carrossel" aria-label="Categorias da loja">
-    <div class="vp"><ul class="tr">{items}</ul></div>
+    <div class="cnav"><span class="hint">Deslize para ver todas as categorias</span><button type="button" data-prev aria-label="Categoria anterior">{L}</button><button type="button" data-next aria-label="Categoria seguinte">{R}</button></div>
+    <div class="vp" tabindex="0"><ul class="tr">{items}</ul></div>
   </div>'''
 
 def cat_panels_html():
