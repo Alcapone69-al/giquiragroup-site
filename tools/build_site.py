@@ -99,7 +99,7 @@ PRODUCTS = [
     {"name": "Super General", "brand": "Super General", "tag": "Split", "category": "Ar condicionado", "variants": _B(22000, 23500, 33500, 41500), "image": "media/produtos/super-general.webp"},
     {"name": "DePoint R410", "brand": "DePoint", "tag": "R410", "category": "Ar condicionado", "variants": _B(19500, 20500, 28500, 37500, 54500), "image": "media/produtos/depoint.webp"},
     {"name": "Mozpoint", "brand": "Mozpoint", "tag": "Split", "category": "Ar condicionado", "variants": _B(18500, 19500, 26500, 36500), "image": "media/produtos/mozpoint.webp"},
-    {"name": "AUX Inverter", "brand": "AUX", "tag": "Inverter", "category": "Ar condicionado", "variants": [("9 000 BTU", 20500), ("12 000 BTU", 21500)], "image": None},
+    {"name": "AUX Inverter", "brand": "AUX", "tag": "Inverter", "category": "Ar condicionado", "variants": [("9 000 BTU", 20500), ("12 000 BTU", 21500)], "image": "media/produtos/aux.webp"},
     {"name": "SPJ · Frio", "brand": "SPJ", "tag": "Frio", "category": "Ar condicionado", "variants": [("9 000 BTU", 18500), ("24 000 BTU", 36500)], "image": "media/produtos/spj.webp"},
     {"name": "Syinix", "brand": "Syinix", "tag": "Split", "category": "Ar condicionado", "variants": [("9 000 BTU", 18500), ("12 000 BTU", 19500)], "image": "media/produtos/syinix.webp"},
     {"name": "Chigo", "brand": "Chigo", "tag": "Split", "category": "Ar condicionado", "variants": [("9 000 BTU", 17500), ("12 000 BTU", 18500)], "image": "media/produtos/chigo.webp"},
