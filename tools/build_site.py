@@ -101,7 +101,7 @@ PRODUCTS = [
     {"name": "Mozpoint", "brand": "Mozpoint", "tag": "Split", "category": "Ar condicionado", "variants": _B(18500, 19500, 26500, 36500), "image": "media/produtos/mozpoint.webp"},
     {"name": "AUX Inverter", "brand": "AUX", "tag": "Inverter", "category": "Ar condicionado", "variants": [("9 000 BTU", 20500), ("12 000 BTU", 21500)], "image": None},
     {"name": "SPJ · Frio", "brand": "SPJ", "tag": "Frio", "category": "Ar condicionado", "variants": [("9 000 BTU", 18500), ("24 000 BTU", 36500)], "image": "media/produtos/spj.webp"},
-    {"name": "Syinix", "brand": "Syinix", "tag": "Split", "category": "Ar condicionado", "variants": [("9 000 BTU", 18500), ("12 000 BTU", 19500)], "image": None},
+    {"name": "Syinix", "brand": "Syinix", "tag": "Split", "category": "Ar condicionado", "variants": [("9 000 BTU", 18500), ("12 000 BTU", 19500)], "image": "media/produtos/syinix.webp"},
     {"name": "Chigo", "brand": "Chigo", "tag": "Split", "category": "Ar condicionado", "variants": [("9 000 BTU", 17500), ("12 000 BTU", 18500)], "image": "media/produtos/chigo.webp"},
 ]
 # Correção do post: no "Gree R410 Frio" os 9 000 e 12 000 BTU aparecem os dois a 23.500 MT — confirmar com a loja.
