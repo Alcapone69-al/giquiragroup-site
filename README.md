@@ -39,7 +39,7 @@ Logótipos em `media/logos/`, configurados em `PARTNERS`.
 
 ## Produtos da loja (carrossel)
 
-O carrossel da página Produtos mostra as 6 categorias (`PLINES`). Ao clicar numa, abre por baixo a lista dessa categoria
+O carrossel da página Produtos mostra as 7 categorias (`PLINES`). Ao clicar numa, abre por baixo a lista dessa categoria
 e a página desce até ela (também abre por link direto, ex.: `produtos.html#telemoveis`).
 Acrescentar itens a `PRODUCTS` com nome, fotografia, preço opcional e `category` igual ao nome da categoria
 (ex.: "Telemóveis"). Categoria sem produtos mostra um botão para perguntar pelo WhatsApp.

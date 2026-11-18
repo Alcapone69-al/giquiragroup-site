@@ -104,7 +104,7 @@ PRODUCTS = [
     {"name": "Syinix", "brand": "Syinix", "tag": "Split", "category": "Ar condicionado", "variants": [("9 000 BTU", 18500), ("12 000 BTU", 19500)], "image": "media/produtos/syinix.webp"},
     {"name": "Chigo", "brand": "Chigo", "tag": "Split", "category": "Ar condicionado", "variants": [("9 000 BTU", 17500), ("12 000 BTU", 18500)], "image": "media/produtos/chigo.webp"},
 ]
-# Correção do post: no "Gree R410 Frio" os 9 000 e 12 000 BTU aparecem os dois a 23.500 MT — confirmar com a loja.
+# Gree R410 Frio: 9 000 e 12 000 BTU têm o mesmo preço (23.500 MT) — confirmado pela loja.
 
 def mt(v):
     return f"{v:,}".replace(",", ".") + " MT"
@@ -145,8 +145,10 @@ def brand(dark=False):
             f'<span class="bn">{BRAND["name"]} <span>{BRAND["name_2"]}</span></span>'
             f'<span class="bt">{BRAND["tagline"] if not dark else BRAND["slogan"]}</span></span></a>')
 
+# Endereço público atual (enquanto o domínio não estiver ligado, usa o do GitHub Pages)
+PUBLIC_URL = SITE_URL or "https://alcapone69-al.github.io/giquiragroup-site"
 def url(path=""):
-    return (SITE_URL.rstrip("/") + "/" + path) if SITE_URL else None
+    return PUBLIC_URL.rstrip("/") + "/" + path
 
 # ═════════════════════════ MOLDE DA PÁGINA ═════════════════════════
 
@@ -156,7 +158,7 @@ def page(fname, title, desc, body, schema=False):
     mnav = "".join(f'<a href="{h}"{AC if h == fname else ""} style="--i:{i}">{t}<small>0{i+1}</small></a>' for i, (h, t) in enumerate(NAV))
     canon = url("" if fname == "index.html" else fname)
     meta_url = f'<link rel="canonical" href="{canon}">\n<meta property="og:url" content="{canon}">\n' if canon else ""
-    og_img = f'<meta property="og:image" content="{url("media/og-giquira.jpg")}">\n' if SITE_URL and os.path.exists(os.path.join(OUT, "media/og-giquira.jpg")) else ""
+    og_img = f'<meta property="og:image" content="{url("media/og-giquira.jpg")}">\n' if os.path.exists(os.path.join(OUT, "media/og-giquira.jpg")) else ""
     ld = ""
     if schema:
         org = {"@context": "https://schema.org", "@type": "Organization", "name": "Giquira Group",
@@ -168,8 +170,8 @@ def page(fname, title, desc, body, schema=False):
                "address": {"@type": "PostalAddress", "streetAddress": CONTACT["address_1"], "addressLocality": "Maputo", "addressCountry": "MZ"},
                "areaServed": {"@type": "Country", "name": "Moçambique"},
                "sameAs": [f"https://instagram.com/{CONTACT['instagram']}"]}
-        if SITE_URL: org["url"] = url()
-        if SITE_URL and BRAND["logo"]: org["logo"] = url(BRAND["logo"])
+        org["url"] = url()
+        if BRAND["logo"]: org["logo"] = url(BRAND["logo"])
         ld = f'<script type="application/ld+json">{json.dumps(org, ensure_ascii=False)}</script>\n'
     labels = json.dumps({h: t for h, t in NAV}, ensure_ascii=False)
     wl = f'<img class="wl" src="{BRAND["logo_light"] or BRAND["logo"]}" alt="" width="973" height="200">' if (BRAND["logo_light"] or BRAND["logo"]) else ""
@@ -249,7 +251,7 @@ def page(fname, title, desc, body, schema=False):
 
 def lines(*parts, start=0):
     """Título revelado linha a linha."""
-    return "".join(f'<span class="ln" style="--i:{start+i}"><span>{p}</span></span>' for i, p in enumerate(parts))
+    return " ".join(f'<span class="ln" style="--i:{start+i}"><span>{p}</span></span>' for i, p in enumerate(parts))
 
 # ═════════════════════════ BLOCOS PARTILHADOS ═════════════════════════
 
@@ -286,7 +288,7 @@ def china_html(videos=True):
     if videos:
         vids = '<div class="vids">' + "".join(
             f'<figure class="vid" data-rv style="--i:{i}"><video src="media/{n}.mp4" poster="media/{n}-poster.webp" playsinline preload="none" aria-label="{l}"></video>'
-            f'<button class="play" type="button" aria-label="Ver vídeo: {l}"><span class="pb">{PLAY}</span><span>{l}<small>{d}</small></span></button></figure>'
+            f'<button class="play" type="button" aria-label="Ver vídeo: {l}"><span class="pb">{PLAY}</span><span>{l} <small>{d}</small></span></button></figure>'
             for i, (n, l, d) in enumerate(VIDEOS)) + "</div>"
     S = "(max-width:760px) 50vw, 33vw"
     return f'''<section class="sec dark" id="china"><div class="w">

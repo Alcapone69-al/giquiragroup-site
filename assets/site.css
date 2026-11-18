@@ -495,3 +495,6 @@ html.wp .wipe:not(.out){animation:wsafe .01s 2.5s forwards}
   html.js [data-rv],html.js [data-img] .ph,html.js [data-img] .ph img{opacity:1;transform:none;clip-path:none}
   .wipe{display:none}
 }
+
+/* Ecrãs muito estreitos (360 px): os números do topo cabem numa linha */
+@media(max-width:400px){.facts li{margin-right:10px!important}.facts span{font-size:12.5px}}
