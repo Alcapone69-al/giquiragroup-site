@@ -282,6 +282,7 @@ textarea{resize:vertical;min-height:96px}
 .partners li:hover{background:var(--g-soft)}
 .partners img{height:64px;width:100%;max-width:100%;object-fit:contain;object-position:left center}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .partners img{background:#fff;padding:8px;border-radius:var(--r);height:68px}}
+.partners img.mid{object-position:center center}
 .partners .k{font:600 13px var(--h);color:var(--g-deep)}
 .partners b{display:block;font:600 17px/1.25 var(--h);letter-spacing:-.015em}
 .partners span{display:block;font-size:13.5px;color:var(--mut);margin-top:4px}

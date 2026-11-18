@@ -55,7 +55,7 @@ CONTACT = {
 
 # Parceiros: quando os logótipos chegarem, colocar em media/logos/ e preencher "logo".
 PARTNERS = [
-    {"name": "Mozambique Terramar Trading", "kind": "Lda", "logo": "media/logos/terramar.webp"},
+    {"name": "Mozambique Terramar Trading", "kind": "Lda", "logo": "media/logos/terramar.webp", "center": True},
     {"name": "Transcargo Haulage Contractors", "kind": "Lda", "logo": "media/logos/transcargo.webp"},
     {"name": "Micaia", "kind": "Fundação", "logo": "media/logos/micaia.webp"},
     {"name": "MozFert", "kind": "Lda", "logo": "media/logos/mozfert.webp"},
@@ -310,7 +310,7 @@ def china_html(videos=True):
 def partners_html(title="Trabalham connosco"):
     li = ""
     for i, p in enumerate(PARTNERS):
-        top = f'<img src="{p["logo"]}" alt="Logótipo {H.escape(p["name"])}" loading="lazy">' if p["logo"] else f'<span class="k">{i+1:02d}</span>'
+        top = f'<img src="{p["logo"]}"{' class="mid"' if p.get("center") else ""} alt="Logótipo {H.escape(p["name"])}" loading="lazy">' if p["logo"] else f'<span class="k">{i+1:02d}</span>'
         li += f'<li data-rv style="--i:{i}">{top}<div><b>{p["name"]}</b><span>{p["kind"]}</span></div></li>'
     return f'''<section class="sec"><div class="w">
   <div class="head"><div data-rv><p class="eyebrow">{title}</p><h2>Parceiros que partilham o nosso rigor.</h2></div></div>
