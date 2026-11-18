@@ -61,10 +61,53 @@ PARTNERS = [
     {"name": "MozFert", "kind": "Lda", "logo": "media/logos/mozfert.webp"},
 ]
 
-# Galeria de produtos — preparada, ainda vazia (não inventar produtos).
-# Cada produto: {"name": "...", "desc": "...", "price": None ou "1 500 MT", "category": None ou "Áudio",
-#                "image": "media/produtos/xxx.webp", "alt": "..."}
-PRODUCTS = []
+# Produtos da loja — tirados dos posts da loja (novembro de 2026). Preços em MT.
+# Cada produto: name, brand, tag (texto grande do cartão enquanto não há foto), category (igual a um nome de PLINES),
+#               desc (opcional), variants [(opção, preço)], image (None até haver foto quadrada em media/produtos/).
+PRICES_DATE = "novembro de 2026"
+_B = lambda *v: list(zip(("9 000 BTU", "12 000 BTU", "18 000 BTU", "24 000 BTU", "30 000 BTU", "36 000 BTU"), v))
+PRODUCTS = [
+    # Telemóveis
+    {"name": "iPhone 18 Pro Max 256 GB · só eSIM", "brand": "Apple", "tag": "18 Pro Max", "category": "Telemóveis",
+     "variants": [("Burgundy", 125000), ("Glacier", 123000), ("Black", 123000), ("Silver", 123000)], "image": None},
+    {"name": "iPhone 18 Pro Max 256 GB · 1 SIM + eSIM", "brand": "Apple", "tag": "18 Pro Max", "category": "Telemóveis",
+     "variants": [("Burgundy", 127000), ("Glacier", 125000), ("Black", 125000), ("Silver", 123000)], "image": None},
+    {"name": "iPhone 18 Pro Max 512 GB · 1 SIM + eSIM", "brand": "Apple", "tag": "18 Pro Max", "category": "Telemóveis",
+     "variants": [("Burgundy", 142000), ("Glacier", 140000), ("Black", 140000), ("Silver", 137000)], "image": None},
+    {"name": "iPhone 17 Pro Max", "brand": "Apple", "tag": "17 Pro Max", "category": "Telemóveis", "desc": "Cores: Blue, Orange e Silver.",
+     "variants": [("256 GB · só eSIM", 108000), ("256 GB · 1 SIM + eSIM", 118000), ("512 GB · 1 SIM + eSIM", 136000), ("1 TB · 1 SIM + eSIM", 152000)], "image": None},
+    {"name": "iPhone 17 Pro · 1 SIM + eSIM", "brand": "Apple", "tag": "17 Pro", "category": "Telemóveis",
+     "variants": [("256 GB", 108000), ("512 GB", 125000), ("1 TB", 135000)], "image": None},
+    {"name": "iPhone 17 Air 256 GB · só eSIM", "brand": "Apple", "tag": "17 Air", "category": "Telemóveis",
+     "variants": [("256 GB", 79000)], "image": None},
+    {"name": "iPhone 17 256 GB · 1 SIM + eSIM", "brand": "Apple", "tag": "17", "category": "Telemóveis",
+     "variants": [("256 GB", 70000)], "image": None},
+    # Televisores
+    {"name": "Samsung Crystal UHD 4K U8000F (2025)", "brand": "Samsung", "tag": "Crystal UHD", "category": "Televisores",
+     "variants": [('43"', 30500), ('55"', 36500), ('65"', 48000), ('75"', 73500), ('85"', 99500)], "image": None},
+    {"name": "Samsung QLED 4K (2025)", "brand": "Samsung", "tag": "QLED", "category": "Televisores",
+     "variants": [('Q70F 55"', 50500), ('Q70F 65"', 60500), ('Q60F 75"', 98500), ('Q70F 85"', 125500)], "image": None},
+    {"name": "Xiaomi TV A", "brand": "Xiaomi", "tag": "TV A", "category": "Televisores",
+     "variants": [('43" Full HD', 18500), ('43" 4K Ultra HD', 20500), ('50" 4K Ultra HD', 27000), ('55" 4K Ultra HD', 31000), ('65" 4K Ultra HD', 43000)], "image": None},
+    {"name": "Xiaomi TV A Pro QLED", "brand": "Xiaomi", "tag": "A Pro QLED", "category": "Televisores",
+     "variants": [('43"', 22500), ('55"', 32000), ('65"', 45000), ('75"', 63000)], "image": None},
+    # Ar condicionado
+    {"name": "Gree R410 Inverter · Frio", "brand": "Gree", "tag": "Inverter", "category": "Ar condicionado", "variants": _B(29500, 32500, 42500, 51500, 65500, 75500), "image": None},
+    {"name": "Gree R410 · Quente e frio", "brand": "Gree", "tag": "Quente e frio", "category": "Ar condicionado", "variants": _B(27500, 30500, 41500, 51500), "image": None},
+    {"name": "Gree R410 · Frio", "brand": "Gree", "tag": "Frio", "category": "Ar condicionado", "variants": _B(23500, 23500, 33500, 39500), "image": None},
+    {"name": "Midea Inverter R32", "brand": "Midea", "tag": "Inverter", "category": "Ar condicionado", "variants": _B(23000, 27500, 37500, 46500), "image": None},
+    {"name": "Super General", "brand": "Super General", "tag": "Split", "category": "Ar condicionado", "variants": _B(22000, 23500, 33500, 41500), "image": None},
+    {"name": "DePoint R410", "brand": "DePoint", "tag": "R410", "category": "Ar condicionado", "variants": _B(19500, 20500, 28500, 37500, 54500), "image": None},
+    {"name": "Mozpoint", "brand": "Mozpoint", "tag": "Split", "category": "Ar condicionado", "variants": _B(18500, 19500, 26500, 36500), "image": None},
+    {"name": "AUX Inverter", "brand": "AUX", "tag": "Inverter", "category": "Ar condicionado", "variants": [("9 000 BTU", 20500), ("12 000 BTU", 21500)], "image": None},
+    {"name": "SPJ · Frio", "brand": "SPJ", "tag": "Frio", "category": "Ar condicionado", "variants": [("9 000 BTU", 18500), ("24 000 BTU", 36500)], "image": None},
+    {"name": "Syinix", "brand": "Syinix", "tag": "Split", "category": "Ar condicionado", "variants": [("9 000 BTU", 18500), ("12 000 BTU", 19500)], "image": None},
+    {"name": "Chigo", "brand": "Chigo", "tag": "Split", "category": "Ar condicionado", "variants": [("9 000 BTU", 17500), ("12 000 BTU", 18500)], "image": None},
+]
+# Correção do post: no "Gree R410 Frio" os 9 000 e 12 000 BTU aparecem os dois a 23.500 MT — confirmar com a loja.
+
+def mt(v):
+    return f"{v:,}".replace(",", ".") + " MT"
 
 NAV = [("index.html", "Início"), ("procurement.html", "Procurement"), ("produtos.html", "Produtos"),
        ("sobre.html", "Sobre nós"), ("contactos.html", "Contactos")]
@@ -234,7 +277,8 @@ def cats_html():
     return '<ul class="cats">' + "".join(
         f'<li data-rv style="--i:{i%3}"><span class="k">{i+1:02d}</span><h3>{t}</h3><p>{d}</p></li>' for i, (t, d) in enumerate(CATS)) + "</ul>"
 
-VIDEOS = [("visita-fabrica", "Visita a uma fábrica parceira", "45 s"),
+VIDEOS = [("visita-dubai", "Visita a um parceiro no Dubai", "13 s"),
+          ("visita-fabrica", "Visita a uma fábrica parceira", "45 s"),
           ("processo-aluminio", "Tratamento de perfis de alumínio", "46 s"),
           ("linha-extrusao", "Linha de extrusão", "14 s")]
 def china_html(videos=True):
@@ -248,14 +292,15 @@ def china_html(videos=True):
     return f'''<section class="sec dark" id="china"><div class="w">
   <div class="head">
     <div data-rv><p class="eyebrow">No terreno</p><h2>Não compramos por catálogo. <em>Vamos à fábrica.</em></h2></div>
-    <p class="lead" data-rv style="--i:1">A nossa equipa visita fornecedores e fábricas: das reuniões de negociação à linha de produção e ao contentor pronto a partir. É assim que a qualidade prometida passa a ser a qualidade entregue.</p>
+    <p class="lead" data-rv style="--i:1">A nossa equipa visita fornecedores, fábricas e parceiros, na China, no Dubai e na Tanzânia: das reuniões de negociação à linha de produção e ao contentor pronto a partir. É assim que a qualidade prometida passa a ser a qualidade entregue.</p>
   </div>
   <div class="mosaic">
-    <figure class="a" data-img>{img("fabrica-maquinaria", "Visita a uma fábrica de maquinaria pesada na China", "(max-width:760px) 100vw, 42vw")}<figcaption>Visita a fábrica de maquinaria pesada</figcaption></figure>
+    <figure class="a" data-img>{img("parceiro-tanzania", "Aperto de mão com um parceiro na Tanzânia, em frente a empilhadores", "(max-width:760px) 100vw, 34vw")}<figcaption>Com um parceiro na Tanzânia</figcaption></figure>
     <figure class="b" data-img style="--i:1">{img("reuniao-cha", "Reunião com uma fornecedora na China", S)}<figcaption>Reunião com fornecedora</figcaption></figure>
     <figure class="c" data-img style="--i:2">{img("reuniao-escritorio", "Reunião de negociação num escritório na China", S)}<figcaption>Negociação</figcaption></figure>
     <figure class="d" data-img style="--i:1">{img("jantar-parceiros", "Jantar com parceiros comerciais na China", S)}<figcaption>Com parceiros</figcaption></figure>
     <figure class="e" data-img style="--i:2">{img("contentor-danilo", "Contentor carregado de mobiliário, pronto a partir", S)}<figcaption>Contentor pronto a partir</figcaption></figure>
+    <figure class="f" data-img style="--i:3">{img("fabrica-maquinaria", "Visita a uma fábrica de maquinaria pesada na China", S)}<figcaption>Fábrica de maquinaria pesada</figcaption></figure>
   </div>
   {vids}
 </div></section>'''
@@ -447,16 +492,38 @@ page("procurement.html", "Procurement | Giquira Group",
 
 # ═════════════════════════ PRODUTOS ═════════════════════════
 
-PLINES = [("telemoveis", "Telemóveis", "Smartphones de várias marcas e gamas."), ("televisores", "Televisores", "Para casa e para o escritório."),
+PLINES = [("telemoveis", "Telemóveis", "iPhone 17 e 18, em várias versões."), ("televisores", "Televisores", "Samsung e Xiaomi, de 43 a 85 polegadas."),
+          ("ar-condicionado", "Ar condicionado", "Gree, Midea e outras marcas, de 9 000 a 36 000 BTU."),
           ("colunas", "Colunas", "Colunas Bluetooth e sistemas de som."), ("consolas", "Consolas", "Consolas de jogos e comandos."),
           ("auriculares", "Auriculares", "Com e sem fios, para o dia a dia."), ("acessorios", "Acessórios", "Carregadores, cabos, capas e mais.")]
 # Cada produto de PRODUCTS deve ter "category" igual a um destes nomes (ex.: "Telemóveis") para aparecer na lista certa.
 
+def prods_of(cat):
+    return [p for p in PRODUCTS if (p.get("category") or "").strip().lower() == cat.lower()]
+
+def product_card(p):
+    vs = p["variants"]
+    lo = min(v for _, v in vs)
+    if p.get("image"):
+        top = f'<div class="pt ph"><img src="{p["image"]}" alt="{H.escape(p["name"])}" loading="lazy" width="600" height="600"></div>'
+    else:
+        top = f'<div class="pt" aria-hidden="true"><span class="br">{H.escape(p["brand"])}</span><b>{H.escape(p["tag"])}</b></div>'
+    if len(vs) > 1:
+        price = f'<p class="from">desde <b>{mt(lo)}</b></p><ul class="var">' + "".join(
+            f'<li><span>{H.escape(l)}</span><b>{mt(v)}</b></li>' for l, v in vs) + "</ul>"
+    else:
+        price = f'<p class="from"><b>{mt(lo)}</b></p>'
+    desc = f'<p class="pd">{H.escape(p["desc"])}</p>' if p.get("desc") else ""
+    msg = f'Olá Giquira Group! Tenho interesse no {p["name"]}. Está disponível?'
+    return (f'<li class="pc">{top}<div class="t"><h4>{H.escape(p["name"])}</h4>{desc}{price}'
+            f'<a class="btn wa sm" href="{wa(msg)}" target="_blank" rel="noopener">{WA_SVG} Encomendar</a></div></li>')
+
 def carousel_html():
-    """Carrossel infinito das 6 categorias da loja. Clicar numa categoria abre a lista dessa secção logo abaixo."""
+    """Carrossel infinito das categorias da loja. Clicar numa categoria abre a lista dessa secção logo abaixo."""
     items = "".join(
         f'<li class="it"><button type="button" class="tile" data-open="{sl}" aria-expanded="false" aria-controls="cat-{sl}">'
-        f'<span class="k">{i+1:02d}</span><h3>{t}</h3><p>{d}</p><span class="more">Ver produtos {GO}</span></button></li>'
+        f'<span class="k">{i+1:02d}{(" · " + str(n) + (" modelos" if n > 1 else " modelo")) if (n := len(prods_of(t))) else ""}</span>'
+        f'<h3>{t}</h3><p>{d}</p><span class="more">Ver produtos {GO}</span></button></li>'
         for i, (sl, t, d) in enumerate(PLINES))
     return f'''<div class="pcar" data-car role="region" aria-roledescription="carrossel" aria-label="Categorias da loja">
     <div class="vp"><ul class="tr">{items}</ul></div>
@@ -466,12 +533,10 @@ def cat_panels_html():
     """Uma lista por categoria, escondida até se clicar na categoria."""
     out = ""
     for sl, t, d in PLINES:
-        prods = [p for p in PRODUCTS if (p.get("category") or "").strip().lower() == t.lower()]
+        prods = prods_of(t)
         if prods:
-            body = '<ul class="gal">' + "".join(
-                f'<li><div class="ph"><img src="{p["image"]}" alt="{H.escape(p.get("alt") or p["name"])}" loading="lazy"></div>'
-                f'<div class="t"><h3>{H.escape(p["name"])}</h3>{"<p>" + H.escape(p["desc"]) + "</p>" if p.get("desc") else ""}'
-                f'{"<p><b>" + H.escape(p["price"]) + "</b></p>" if p.get("price") else ""}</div></li>' for p in prods) + "</ul>"
+            body = ('<ul class="prods">' + "".join(product_card(p) for p in prods) + "</ul>"
+                    f'<p class="pnote">Preços de {PRICES_DATE}, sujeitos a alteração. Confirme o preço e a disponibilidade pelo WhatsApp antes de vir à loja.</p>')
         else:
             body = (f'<div class="empty"><p>A lista de {t.lower()} em stock vai estar aqui em breve. Até lá, pergunte-nos o que temos neste momento.</p>'
                     f'<a class="btn wa" href="{wa("Olá Giquira Group! Que " + t.lower() + " têm em stock?")}" target="_blank" rel="noopener">{WA_SVG} Perguntar por {t.lower()}</a></div>')
@@ -483,7 +548,7 @@ def cat_panels_html():
 prod = f'''<section class="pghero"><div class="w">
   <p class="eyebrow fade" style="--d:0">Serviço de apoio · Produtos</p>
   <h1>{lines("Loja com stock,", "<em>pronta a levar.</em>")}</h1>
-  <p class="lead fade" style="--d:.4;max-width:52ch">Temos loja física com stock de eletrónica: telemóveis, televisores, colunas, consolas, auriculares e acessórios. Vendemos a particulares e a revendedores, com a mesma rede de fornecedores que usamos no procurement.</p>
+  <p class="lead fade" style="--d:.4;max-width:52ch">Temos loja física com stock de eletrónica e climatização: telemóveis, televisores, ar condicionado, colunas, consolas, auriculares e acessórios. Vendemos a particulares e a revendedores, com a mesma rede de fornecedores que usamos no procurement.</p>
   <div class="cta fade" style="--d:.55"><a class="btn wa" href="{wa("Olá Giquira Group! Que produtos têm disponíveis?")}" target="_blank" rel="noopener">{WA_SVG} Ver disponibilidade</a><a class="btn o" href="#loja">Onde fica a loja</a></div>
 </div></section>
 
@@ -502,7 +567,7 @@ prod = f'''<section class="pghero"><div class="w">
 {cta_dark("Não está aqui? <em>Encontramos.</em>", "É para isso que existe o nosso procurement. Diga-nos o que procura e compramos na origem.", b2=("procurement.html", "Ver procurement"))}
 '''
 page("produtos.html", "Produtos | Giquira Group",
-     "Loja Giquira Group com stock de eletrónica: telemóveis, televisores, colunas, consolas e auriculares.", prod)
+     "Loja Giquira Group em Maputo: iPhone, televisores Samsung e Xiaomi, ar condicionado e mais, com preços.", prod)
 
 # ═════════════════════════ SOBRE ═════════════════════════
 
