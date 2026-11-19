@@ -165,7 +165,7 @@ def page(fname, title, desc, body, schema=False):
     if schema:
         org = {"@context": "https://schema.org", "@type": "Organization", "name": "Giquira Group",
                "slogan": BRAND["slogan"], "email": CONTACT["email"],
-               "description": "Grupo familiar em Maputo: procurement internacional, logística e venda de produtos.",
+               "description": "Grupo familiar em Maputo: procurement internacional, logística, venda de produtos eletrónicos, consultoria e construção civil.",
                "subOrganization": {"@type": "Organization", "name": COMPAN["name"], "foundingDate": "2021-11",
                                    "description": "Empresa do Giquira Group dedicada ao procurement."},
                "telephone": ["+" + CONTACT["wa_main"], "+" + CONTACT["wa_alt"]],
@@ -351,7 +351,7 @@ home = f'''<section class="hero"><div class="w hgrid">
     <h1>{lines("Um grupo de família.", "Um só <em>parceiro.</em>")}</h1>
     <p class="lead fade" style="--d:.35">O Giquira Group encontra o fornecedor certo, onde quer que ele esteja, e trata do transporte até Moçambique.</p>
     <div class="cta fade" style="--d:.5"><a class="btn" href="#pedido">Pedir cotação {ARROW}</a><a class="btn o" href="#servicos">Ver os serviços</a></div>
-    <ul class="facts fade" style="--d:.65"><li><b>3</b><span>Áreas de negócio</span></li><li><b>4</b><span>Países</span></li><li><b>{COMPAN["team"]}</b><span>Colaboradores</span></li></ul>
+    <ul class="facts fade" style="--d:.65"><li><b>5</b><span>Áreas de negócio</span></li><li><b>4</b><span>Países</span></li><li><b>{COMPAN["team"]}</b><span>Colaboradores</span></li></ul>
   </div>
   <figure class="shot" id="shot">
     {hero_slides()}
@@ -367,7 +367,7 @@ home = f'''<section class="hero"><div class="w hgrid">
   <div class="sticky"><p class="eyebrow" data-rv>Quem somos</p><h2 data-rv>Uma empresa de família, feita de comércio.</h2></div>
   <div class="prose">
     <p data-rv>O Giquira Group é um grupo familiar sediado em Maputo. Nasceu da experiência da família nas áreas de produção alimentar, construção civil e produtos, construída em mercados como a África do Sul, os Emirados Árabes Unidos, a China e a Tanzânia.</p>
-    <p data-rv>Hoje o grupo expandiu para mais três áreas: procurement, logística e venda de produtos eletrónicos.</p>
+    <p data-rv>Hoje o grupo expandiu para mais três áreas: procurement, logística e venda de produtos eletrónicos. Atua também em consultoria e construção civil.</p>
     <p data-rv>Empresas do grupo: {", ".join(GROUP_COMPANIES[:-1])} e {GROUP_COMPANIES[-1]}.</p>
     <p data-rv>Mais do que um nome, somos uma família e uma equipa com o mesmo compromisso em cada pedido.</p>
     <ul class="chips" data-rv><li>África do Sul</li><li>Emirados Árabes Unidos</li><li>China</li><li>Tanzânia</li></ul>
@@ -376,12 +376,16 @@ home = f'''<section class="hero"><div class="w hgrid">
 </div></section>
 
 <section class="sec alt" id="servicos"><div class="w">
-  <div class="head"><div data-rv><p class="eyebrow">O que fazemos</p><h2>Três serviços, <em>um centro.</em></h2></div><p class="lead" data-rv style="--i:1">O procurement é o coração do grupo. A logística e a loja nasceram dele.</p></div>
+  <div class="head"><div data-rv><p class="eyebrow">O que fazemos</p><h2>Cinco áreas, <em>um só parceiro.</em></h2></div><p class="lead" data-rv style="--i:1">O procurement é o coração do grupo. A logística e a loja nasceram dele, e o grupo atua também em consultoria e construção civil.</p></div>
   <div class="svc">
     <a href="procurement.html" class="card main" data-rv><div data-img>{img("fabrica-aluminio-2", "Visita a uma fábrica de perfis de alumínio", "(max-width:760px) 100vw, 56vw")}</div><div class="t"><span class="badge">Mais procurado</span><span class="k">Serviço principal · {COMPAN["name"]}</span><h3>Procurement</h3><p>Encontramos o fornecedor certo, negociamos por si, acompanhamos a produção e entregamos em Moçambique. Um só responsável, do pedido à entrega.</p><span class="go">Ver o procurement {GO}</span></div></a>
     <a href="procurement.html#logistica" class="card" data-rv style="--i:1"><div data-img>{img("carregamento-empilhador", "Carregamento de um contentor com empilhador num armazém", "(max-width:760px) 100vw, 40vw")}</div><div class="t"><span class="k">Serviço de apoio</span><h3>Logística</h3><p>Embarque, desalfandegamento e entrega até à sua porta.</p><span class="go">Ver a logística {GO}</span></div></a>
     <a href="produtos.html" class="card solid" data-rv style="--i:2"><div class="t"><span class="k">Serviço de apoio</span><h3>Venda de produtos</h3><p>Loja física com stock de eletrónica: telemóveis, televisores, colunas, consolas e auriculares.</p><span class="go">Ver produtos {GO}</span></div></a>
   </div>
+  <div class="svc2">
+    <div class="card" data-rv><div class="t"><span class="k">Também atuamos em</span><h3>Consultoria</h3><p>Apoio a empresas e organizações nas suas decisões de compra e de negócio.</p><a class="go" href="{wa("Olá Giquira Group! Gostaria de saber mais sobre os vossos serviços de consultoria.")}" target="_blank" rel="noopener">Falar connosco {GO}</a></div></div>
+    <div class="card" data-rv style="--i:1"><div class="t"><span class="k">Também atuamos em</span><h3>Construção civil</h3><p>Obras e projetos de construção, com materiais e equipamentos da nossa rede de fornecedores.</p><a class="go" href="{wa("Olá Giquira Group! Gostaria de saber mais sobre os vossos serviços de construção civil.")}" target="_blank" rel="noopener">Falar connosco {GO}</a></div></div>
+</div>
 </div></section>
 
 <section class="sec"><div class="w g2">
@@ -604,7 +608,7 @@ sobre = f'''<section class="pghero"><div class="w">
     <h2 data-rv>Experiência construída nos mercados de onde as coisas vêm.</h2>
     <p data-rv>O Giquira Group é uma empresa de família sediada em Maputo. Nasceu da experiência da família nas áreas de produção alimentar, construção civil e produtos, construída em mercados como a África do Sul, os Emirados Árabes Unidos, a China e a Tanzânia. Dessa vivência nasceu a convicção de que qualidade e proximidade não são opostas: são as duas faces da mesma moeda.</p>
     <p data-rv>Em {COMPAN["founded"]} nasceu a {COMPAN["name"]}, o ramo do grupo que faz o procurement: compramos material industrial, equipamentos de construção, mobiliário para escritórios e residências, equipamento de segurança e proteção individual, energias renováveis e material hospitalar para pequenas e médias empresas, ONGs e particulares.</p>
-    <p data-rv>Hoje o grupo expandiu para mais três áreas: procurement, logística e venda de produtos eletrónicos. À volta do procurement cresceram a logística, que leva cada compra até ao destino, e a loja, com stock de eletrónica pronto a vender.</p>
+    <p data-rv>Hoje o grupo expandiu para mais três áreas: procurement, logística e venda de produtos eletrónicos, e atua também em consultoria e construção civil. À volta do procurement cresceram a logística, que leva cada compra até ao destino, e a loja, com stock de eletrónica pronto a vender.</p>
     <p data-rv>Empresas do grupo: {", ".join(GROUP_COMPANIES[:-1])} e {GROUP_COMPANIES[-1]}.</p>
     <p data-rv>Somos uma equipa de {COMPAN["team"]} colaboradores, orientada por processos e guiada por pessoas.</p>
     <ul class="chips" data-rv><li>África do Sul</li><li>Emirados Árabes Unidos</li><li>China</li><li>Tanzânia</li></ul>

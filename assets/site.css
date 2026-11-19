@@ -509,3 +509,9 @@ html.wp .wipe:not(.out){animation:wsafe .01s 2.5s forwards}
 .sdots{position:absolute;top:14px;right:14px;z-index:2;display:flex;gap:6px;padding:6px 8px;border-radius:999px;background:#0000004d;backdrop-filter:blur(6px)}
 .sdots button{width:8px;height:8px;padding:0;border:0;border-radius:99px;background:#ffffff8c;cursor:pointer;transition:width .35s var(--ease),background .35s}
 .sdots button[aria-current="true"]{width:22px;background:#fff}
+
+/* Consultoria e construção civil (por baixo dos três serviços) */
+.svc2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.svc2 .card:hover{transform:none}
+.svc2 .go{text-decoration:none;color:var(--g-deep)}
+@media(max-width:760px){.svc2{grid-template-columns:1fr}}
