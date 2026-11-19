@@ -105,6 +105,23 @@ PRODUCTS = [
     {"name": "SPJ · Frio", "brand": "SPJ", "tag": "Frio", "category": "Ar condicionado", "variants": [("9 000 BTU", 18500), ("24 000 BTU", 36500)], "image": "media/produtos/spj.webp"},
     {"name": "Syinix", "brand": "Syinix", "tag": "Split", "category": "Ar condicionado", "variants": [("9 000 BTU", 18500), ("12 000 BTU", 19500)], "image": "media/produtos/syinix.webp"},
     {"name": "Chigo", "brand": "Chigo", "tag": "Split", "category": "Ar condicionado", "variants": [("9 000 BTU", 17500), ("12 000 BTU", 18500)], "image": "media/produtos/chigo.webp"},
+    # Internet via satélite (lista de 19/11/2026)
+    {"name": "Kit Starlink", "brand": "Starlink", "tag": "Internet", "category": "Internet Starlink", "desc": "Internet via satélite, em qualquer ponto do país.",
+     "variants": [("Starlink Standard (V4)", 22000), ("Starlink Mini", 12800)], "image": "media/produtos/starlink.webp"},
+    # Vídeo e microfones
+    {"name": "DJI Osmo Mobile (estabilizador para telemóvel)", "brand": "DJI", "tag": "Osmo Mobile", "category": "Vídeo e microfones",
+     "variants": [("Osmo Mobile 7P", 11000), ("Osmo Mobile 8", 12000), ("Osmo Mobile 8P", 15500)], "image": "media/produtos/dji-osmo-mobile.webp"},
+    {"name": "DJI Mic Mini (microfone sem fios)", "brand": "DJI", "tag": "Mic Mini", "category": "Vídeo e microfones",
+     "variants": [("DJI Mic Mini 2", 16000), ("DJI Mic Mini 2S", 21000), ("Capas magnéticas (várias cores)", 2500)], "image": "media/produtos/dji-mic-mini.webp"},
+    {"name": "Hollyland Lark (microfone sem fios)", "brand": "Hollyland", "tag": "Lark M2", "category": "Vídeo e microfones",
+     "variants": [("Lark M2", 11000), ("Lark M2S", 12500)], "image": "media/produtos/hollyland-lark-m2.webp"},
+    # Consolas e jogos
+    {"name": "GTA 6 (PS5)", "brand": "PlayStation 5", "tag": "GTA 6", "category": "Consolas e jogos", "variants": [("Jogo para PS5", 7500)], "image": "media/produtos/gta-6.webp"},
+    {"name": "Consola portátil SJGAM M18", "brand": "SJGAM", "tag": "M18", "category": "Consolas e jogos", "variants": [("SJGAM M18", 8000)], "image": "media/produtos/sjgam-m18.webp"},
+    # Acessórios e equipamentos
+    {"name": "Sunmi V2s (POS com impressora)", "brand": "Sunmi", "tag": "V2s", "category": "Acessórios e equipamentos", "desc": "Terminal de vendas portátil com impressora de talões.",
+     "variants": [("Sunmi V2s", 14500)], "image": "media/produtos/sunmi-v2s.webp"},
+    {"name": "Localizador GPS (tracker)", "brand": "GPS", "tag": "Tracker", "category": "Acessórios e equipamentos", "variants": [("Tracker GPS", 3500)], "image": None},
 ]
 # Gree R410 Frio: 9 000 e 12 000 BTU têm o mesmo preço (23.500 MT) — confirmado pela loja.
 
@@ -515,8 +532,12 @@ page("procurement.html", "Procurement | Giquira Group",
 
 PLINES = [("telemoveis", "Telemóveis", "iPhone 17 e 18, em várias versões."), ("televisores", "Televisores", "Samsung e Xiaomi, de 43 a 85 polegadas."),
           ("ar-condicionado", "Ar condicionado", "Gree, Midea e outras marcas, de 9 000 a 36 000 BTU."),
-          ("colunas", "Colunas", "Colunas Bluetooth e sistemas de som."), ("consolas", "Consolas", "Consolas de jogos e comandos."),
-          ("auriculares", "Auriculares", "Com e sem fios, para o dia a dia."), ("acessorios", "Acessórios", "Carregadores, cabos, capas e mais.")]
+          ("starlink", "Internet Starlink", "Kits Starlink Standard e Mini."),
+          ("video", "Vídeo e microfones", "Estabilizadores DJI e microfones sem fios."),
+          ("consolas", "Consolas e jogos", "Consolas portáteis e jogos para PS5."),
+          ("acessorios", "Acessórios e equipamentos", "POS com impressora, localizadores GPS e mais."),
+          ("colunas", "Colunas", "Colunas Bluetooth e sistemas de som."),
+          ("auriculares", "Auriculares", "Com e sem fios, para o dia a dia.")]
 # Cada produto de PRODUCTS deve ter "category" igual a um destes nomes (ex.: "Telemóveis") para aparecer na lista certa.
 
 def prods_of(cat):
@@ -572,7 +593,7 @@ def cat_panels_html():
 prod = f'''<section class="pghero"><div class="w">
   <p class="eyebrow fade" style="--d:0">Serviço de apoio · Produtos</p>
   <h1>{lines("Loja com stock,", "<em>pronta a levar.</em>")}</h1>
-  <p class="lead fade" style="--d:.4;max-width:52ch">Temos loja física com stock de eletrónica e climatização: telemóveis, televisores, ar condicionado, colunas, consolas, auriculares e acessórios. Vendemos a particulares e a revendedores, com a mesma rede de fornecedores que usamos no procurement.</p>
+  <p class="lead fade" style="--d:.4;max-width:52ch">Temos loja física com stock de eletrónica e climatização: telemóveis, televisores, ar condicionado, Starlink, equipamento de vídeo e microfones, consolas e jogos, e acessórios. Vendemos a particulares e a revendedores, com a mesma rede de fornecedores que usamos no procurement.</p>
   <div class="cta fade" style="--d:.55"><a class="btn wa" href="{wa("Olá Giquira Group! Que produtos têm disponíveis?")}" target="_blank" rel="noopener">{WA_SVG} Ver disponibilidade</a><a class="btn o" href="#loja">Onde fica a loja</a></div>
 </div></section>
 
