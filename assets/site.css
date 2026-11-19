@@ -498,3 +498,14 @@ html.wp .wipe:not(.out){animation:wsafe .01s 2.5s forwards}
 
 /* Ecrãs muito estreitos (360 px): os números do topo cabem numa linha */
 @media(max-width:400px){.facts li{margin-right:10px!important}.facts span{font-size:12.5px}}
+
+/* Fotos a deslizar no topo do Início */
+.slides{position:relative;touch-action:pan-y}
+.slides .sl{opacity:0;transition:opacity .9s var(--ease)}
+.slides .sl:not(:first-child){position:absolute;inset:0}
+.slides .sl.on{opacity:1;z-index:1}
+.slides .sl .ph{height:100%}
+.slides .cap{position:absolute;bottom:14px;left:14px;max-width:calc(100% - 28px);font:600 13px/1.25 var(--b);background:color-mix(in srgb,var(--bg) 88%,transparent);color:var(--ink);padding:8px 12px;border-radius:999px;backdrop-filter:blur(8px)}
+.sdots{position:absolute;top:14px;right:14px;z-index:2;display:flex;gap:6px;padding:6px 8px;border-radius:999px;background:#0000004d;backdrop-filter:blur(6px)}
+.sdots button{width:8px;height:8px;padding:0;border:0;border-radius:99px;background:#ffffff8c;cursor:pointer;transition:width .35s var(--ease),background .35s}
+.sdots button[aria-current="true"]{width:22px;background:#fff}

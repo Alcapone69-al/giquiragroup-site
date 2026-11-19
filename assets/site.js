@@ -266,5 +266,18 @@ $$('[data-year]').forEach(function(e){e.textContent=new Date().getFullYear()});
   [].forEach.call(document.querySelectorAll('[data-close]'),function(c){c.addEventListener('click',function(){close(c.closest('.cpanel'))})});
   var h=location.hash.replace('#','');if(h&&document.getElementById('cat-'+h))setTimeout(function(){open(h)},300);
 })();
+/* ── fotos a deslizar no topo do Início ─────────────────────────────────── */
+(function(){
+  var box=document.querySelector('[data-slides]');if(!box)return;
+  var sl=[].slice.call(box.querySelectorAll('.sl')),dots=[].slice.call(box.querySelectorAll('.sdots button')),k=0,tid=null;
+  var show=function(n){k=(n+sl.length)%sl.length;sl.forEach(function(s,i){s.classList.toggle('on',i===k)});dots.forEach(function(d,i){if(i===k)d.setAttribute('aria-current','true');else d.removeAttribute('aria-current')})};
+  var run=function(){if(tid||RM)return;tid=setInterval(function(){show(k+1)},5000)};
+  var stop=function(){clearInterval(tid);tid=null};
+  dots.forEach(function(d,i){d.addEventListener('click',function(){stop();show(i);run()})});
+  box.addEventListener('mouseenter',stop);box.addEventListener('mouseleave',run);
+  var x0=null;box.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;stop()},{passive:true});
+  box.addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40)show(k+(dx<0?1:-1));x0=null;run()});
+  run();
+})();
 })();
 

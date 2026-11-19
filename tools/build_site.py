@@ -44,7 +44,9 @@ def store_iframe(title):
             f'&amp;layer=mapnik&amp;marker={la}%2C{lo}"></iframe>')
 
 # Empresa do grupo que faz o procurement (carta de apresentação, nov. 2026)
-COMPAN = {"name": "Compan Services, Lda", "founded": "novembro de 2021", "team": 8}
+COMPAN = {"name": "Compan Services, Lda", "founded": "novembro de 2021", "team": 13}
+# Empresas do grupo (notas do Danilo, 18/11/2026)
+GROUP_COMPANIES = ["Compan Services, Lda", "RA Solution", "FA Electronics"]
 
 CONTACT = {
     "wa_main": "258844266127", "wa_main_label": "+258 84 426 6127",
@@ -269,12 +271,12 @@ def steps_html():
                 for i, (t, d, l) in enumerate(STEPS))
     return f'<div class="steps" id="steps"><span class="rail" aria-hidden="true"><b id="fill"></b></span><ol class="stl">{s}</ol></div>'
 
-CATS = [("Mobiliário", "Escritório, hotelaria, escolas e residências."),
-        ("Eletrodomésticos", "Linha branca e equipamento de cozinha."),
-        ("Equipamento de TI", "Computadores, redes, sistemas e periféricos."),
-        ("Peças automotivas", "Peças e acessórios para frotas e oficinas."),
-        ("Peças industriais", "Peças de reposição e equipamento industrial."),
-        ("Acessórios de tecnologia", "Áudio, carregadores, wearables e gadgets.")]
+CATS = [("Material industrial", "Peças, ferramentas e equipamento para a indústria."),
+        ("Equipamentos de construção", "Máquinas e materiais para construção civil."),
+        ("Mobiliário", "Para escritórios e residências."),
+        ("Segurança e proteção individual", "EPI: fardamento, calçado, capacetes e mais."),
+        ("Energias renováveis", "Painéis solares, baterias e sistemas de energia."),
+        ("Material hospitalar", "Equipamento e consumíveis para unidades de saúde.")]
 def cats_html():
     return '<ul class="cats">' + "".join(
         f'<li data-rv style="--i:{i%3}"><span class="k">{i+1:02d}</span><h3>{t}</h3><p>{d}</p></li>' for i, (t, d) in enumerate(CATS)) + "</ul>"
@@ -328,6 +330,20 @@ GO = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4"
 
 # ═════════════════════════ INÍCIO ═════════════════════════
 
+# Fotos a deslizar no topo do Início. O Danilo vai mandar fotos do armazém, dos contentores e da Praça dos Heróis:
+# quando chegarem, guardar em media/ (versões <nome>.webp 960×1280 e <nome>-480.webp) e acrescentar aqui.
+HERO_SLIDES = [
+    ("fabrica-aluminio", "Luís, CEO do Giquira Group, numa fábrica de alumínio na China", "Luís, CEO, numa fábrica de alumínio na China"),
+    ("contentor-carregado", "Contentor carregado com mobiliário à saída de um armazém", "Contentor carregado à saída do armazém"),
+    ("carregamento-empilhador", "Carregamento de um contentor com empilhador num armazém", "Carregamento no armazém"),
+]
+def hero_slides():
+    S = "(max-width:900px) 100vw, 44vw"
+    sl = "".join(f'<div class="sl{" on" if i == 0 else ""}" role="group" aria-roledescription="foto" aria-label="{i+1} de {len(HERO_SLIDES)}">'
+                 f'{img(n, a, S, eager=(i == 0))}<span class="cap">{c}</span></div>' for i, (n, a, c) in enumerate(HERO_SLIDES))
+    dots = "".join(f'<button type="button" aria-label="Ver foto {i+1}"{" aria-current=\"true\"" if i == 0 else ""}></button>' for i in range(len(HERO_SLIDES)))
+    return f'<div class="slides" data-slides aria-roledescription="carrossel" aria-label="Fotografias do Giquira Group">{sl}<div class="sdots">{dots}</div></div>' if len(HERO_SLIDES) > 1 else sl
+
 TRACK = ["Fábrica", "Negociação", "Produção", "Inspeção", "Embarque", "Entrega"]
 home = f'''<section class="hero"><div class="w hgrid">
   <div>
@@ -338,8 +354,7 @@ home = f'''<section class="hero"><div class="w hgrid">
     <ul class="facts fade" style="--d:.65"><li><b>3</b><span>Áreas de negócio</span></li><li><b>4</b><span>Países</span></li><li><b>{COMPAN["team"]}</b><span>Colaboradores</span></li></ul>
   </div>
   <figure class="shot" id="shot">
-    {img("fabrica-aluminio", "Luís, CEO do Giquira Group, numa fábrica de alumínio na China", "(max-width:900px) 100vw, 44vw", eager=True)}
-    <figcaption>Luís, CEO, numa fábrica de alumínio na China</figcaption>
+    {hero_slides()}
     <div class="track" id="track" aria-hidden="true">
       <div class="top"><span class="ref">GQ-<i>0421</i></span><span class="stt" id="trst">Em sourcing</span></div>
       <ol>{"".join(f"<li>{t}</li>" for t in TRACK)}</ol>
@@ -351,9 +366,10 @@ home = f'''<section class="hero"><div class="w hgrid">
 <section class="sec" id="empresa"><div class="w g2">
   <div class="sticky"><p class="eyebrow" data-rv>Quem somos</p><h2 data-rv>Uma empresa de família, feita de comércio.</h2></div>
   <div class="prose">
-    <p data-rv>O Giquira Group é um grupo familiar sediado em Maputo. Nasceu da experiência da família no comércio nacional e internacional, construída em mercados como a África do Sul, os Emirados Árabes Unidos, a China e a Tanzânia.</p>
-    <p data-rv>Hoje trabalhamos em três frentes: procurement, logística e venda de produtos. O procurement, o serviço mais procurado, é feito pela {COMPAN["name"]}, a empresa do grupo criada em {COMPAN["founded"]}.</p>
-    <p data-rv>Mais do que um nome, somos uma família e uma equipa com o mesmo compromisso em cada encomenda.</p>
+    <p data-rv>O Giquira Group é um grupo familiar sediado em Maputo. Nasceu da experiência da família nas áreas de produção alimentar, construção civil e produtos, construída em mercados como a África do Sul, os Emirados Árabes Unidos, a China e a Tanzânia.</p>
+    <p data-rv>Hoje o grupo expandiu para mais três áreas: procurement, logística e venda de produtos eletrónicos.</p>
+    <p data-rv>Empresas do grupo: {", ".join(GROUP_COMPANIES[:-1])} e {GROUP_COMPANIES[-1]}.</p>
+    <p data-rv>Mais do que um nome, somos uma família e uma equipa com o mesmo compromisso em cada pedido.</p>
     <ul class="chips" data-rv><li>África do Sul</li><li>Emirados Árabes Unidos</li><li>China</li><li>Tanzânia</li></ul>
     <a class="tlink" data-rv href="sobre.html" style="margin-top:28px">A nossa história {GO}</a>
   </div>
@@ -373,7 +389,6 @@ home = f'''<section class="hero"><div class="w hgrid">
   <div class="mv">
     <div data-rv><h3>PMEs</h3><p>Equipamento, stock e reposição sem ter de viajar nem arriscar com fornecedores desconhecidos.</p></div>
     <div data-rv><h3>ONGs</h3><p>Compras com especificação clara, documentação completa e prazos cumpridos.</p></div>
-    <div data-rv><h3>Instituições públicas</h3><p>Processos transparentes e rastreáveis, do pedido à entrega.</p></div>
     <div data-rv><h3>Particulares</h3><p>Mobiliário, eletrodomésticos e eletrónica, por encomenda ou na nossa loja.</p></div>
   </div>
 </div></section>
@@ -451,7 +466,7 @@ proc = f'''<section class="pghero"><div class="w hgrid" style="align-items:end">
   <div class="sticky"><p class="eyebrow" data-rv>Quem faz</p><h2 data-rv>{COMPAN["name"]}</h2><p class="lead" data-rv style="--i:1">A empresa do Giquira Group dedicada ao procurement.</p></div>
   <div class="prose">
     <p data-rv>A Compan Services foi criada em {COMPAN["founded"]} por representantes com muita experiência no comércio nacional e internacional, em especial na África do Sul, nos Emirados Árabes Unidos, na China e na Tanzânia.</p>
-    <p data-rv>Fornece mobiliário, eletrodomésticos, equipamentos e sistemas de tecnologia da informação, peças automotivas e peças de reposição industriais a pequenas e médias empresas, ONGs, instituições públicas e particulares.</p>
+    <p data-rv>Fornece mobiliário, eletrodomésticos, equipamentos e sistemas de tecnologia da informação, peças automotivas e peças de reposição industriais a pequenas e médias empresas, ONGs e particulares.</p>
     <p data-rv>Conta com {COMPAN["team"]} colaboradores experientes e com o compromisso de um serviço de qualidade, com bons resultados e a máxima satisfação de cada cliente.</p>
     <ul class="chips" data-rv><li>África do Sul</li><li>Emirados Árabes Unidos</li><li>China</li><li>Tanzânia</li></ul>
   </div>
@@ -518,7 +533,7 @@ def product_card(p):
     desc = f'<p class="pd">{H.escape(p["desc"])}</p>' if p.get("desc") else ""
     msg = f'Olá Giquira Group! Tenho interesse no {p["name"]}. Está disponível?'
     return (f'<li class="pc">{top}<div class="t"><h4>{H.escape(p["name"])}</h4>{desc}{price}'
-            f'<a class="btn wa sm" href="{wa(msg)}" target="_blank" rel="noopener">{WA_SVG} Encomendar</a></div></li>')
+            f'<a class="btn wa sm" href="{wa(msg)}" target="_blank" rel="noopener">{WA_SVG} Fazer pedido</a></div></li>')
 
 def carousel_html():
     """Carrossel infinito das categorias da loja. Clicar numa categoria abre a lista dessa secção logo abaixo."""
@@ -587,9 +602,10 @@ sobre = f'''<section class="pghero"><div class="w">
   <div class="prose">
     <p class="eyebrow" data-rv>A nossa história</p>
     <h2 data-rv>Experiência construída nos mercados de onde as coisas vêm.</h2>
-    <p data-rv>O Giquira Group é uma empresa de família sediada em Maputo. Nasceu da experiência da família no comércio nacional e internacional, construída em mercados como a África do Sul, os Emirados Árabes Unidos, a China e a Tanzânia. Dessa vivência nasceu a convicção de que qualidade e proximidade não são opostas: são as duas faces da mesma moeda.</p>
-    <p data-rv>Em {COMPAN["founded"]} nasceu a {COMPAN["name"]}, o ramo do grupo que faz o procurement: compramos mobiliário, eletrodomésticos, equipamentos e sistemas de TI, peças automotivas e peças de reposição industriais para pequenas e médias empresas, ONGs, instituições públicas e particulares.</p>
-    <p data-rv>À volta do procurement cresceram a logística, que leva cada compra até ao destino, e a loja, com stock de eletrónica pronto a vender.</p>
+    <p data-rv>O Giquira Group é uma empresa de família sediada em Maputo. Nasceu da experiência da família nas áreas de produção alimentar, construção civil e produtos, construída em mercados como a África do Sul, os Emirados Árabes Unidos, a China e a Tanzânia. Dessa vivência nasceu a convicção de que qualidade e proximidade não são opostas: são as duas faces da mesma moeda.</p>
+    <p data-rv>Em {COMPAN["founded"]} nasceu a {COMPAN["name"]}, o ramo do grupo que faz o procurement: compramos material industrial, equipamentos de construção, mobiliário para escritórios e residências, equipamento de segurança e proteção individual, energias renováveis e material hospitalar para pequenas e médias empresas, ONGs e particulares.</p>
+    <p data-rv>Hoje o grupo expandiu para mais três áreas: procurement, logística e venda de produtos eletrónicos. À volta do procurement cresceram a logística, que leva cada compra até ao destino, e a loja, com stock de eletrónica pronto a vender.</p>
+    <p data-rv>Empresas do grupo: {", ".join(GROUP_COMPANIES[:-1])} e {GROUP_COMPANIES[-1]}.</p>
     <p data-rv>Somos uma equipa de {COMPAN["team"]} colaboradores, orientada por processos e guiada por pessoas.</p>
     <ul class="chips" data-rv><li>África do Sul</li><li>Emirados Árabes Unidos</li><li>China</li><li>Tanzânia</li></ul>
     <p class="quote" data-rv>{BRAND["slogan"]}</p>
